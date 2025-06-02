@@ -1,1 +1,35 @@
 @import "tailwindcss";
+
+a {
+  @apply transition duration-200 hover:drop-shadow-[0_0_2px_white] hover:drop-shadow-[0_0_4px_white] hover:drop-shadow-[0_0_6px_white] cursor-pointer;
+}
+
+input {
+  @apply bg-slate-800 text-white px-3 py-2 rounded border border-slate-700 focus:drop-shadow-[0_0_2px_white] focus:drop-shadow-[0_0_4px_white] focus:drop-shadow-[0_0_6px_white] transition w-[250px];
+}
+  
+button {
+  @apply outline-none focus:bg-blue-700;
+
+}
+
+.selected {
+  font-weight: bold;
+  text-shadow: 0 0 12px rgba(255, 255, 255, 0.5);
+}
+
+.primary-button {
+  @apply bg-blue-600 text-white px-5 py-2 rounded transition hover:bg-blue-700 transition disabled:opacity-50;
+}
+
+.secondary-button {
+  @apply bg-slate-800 text-white px-5 py-2 rounded transition hover:bg-slate-900 disabled:opacity-50 border border-slate-900 hover:border hover:border-slate-700;
+}
+
+.warning-button {
+  @apply bg-yellow-500 text-white px-5 py-2 rounded transition hover:bg-yellow-600 disabled:opacity-50;
+}
+
+.danger-button {
+  @apply bg-red-600 text-white px-5 py-2 rounded transition hover:bg-red-700 disabled:opacity-50;
+}

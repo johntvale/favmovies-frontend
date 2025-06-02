@@ -1,0 +1,14 @@
+.login-page{
+  background-image: url('../../../assets/images/login-background.png');
+  background-size: cover;
+  background-position: center;
+}
+
+.filter-30 {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.3);
+}

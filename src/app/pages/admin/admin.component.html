@@ -1,1 +1,36 @@
-<p>admin works!</p>
+<div class="admin-page">
+  <app-header></app-header>
+  <div class="container">
+    <aside class="w-50 rounded-r-lg bg-slate-900">
+      <nav class="flex p-4">
+        <ul class="">
+          <li>
+            <a routerLink="/dashboard" class="block py-2 w-40 flex items-center gap-3">
+              <ng-icon name="bootstrapColumnsGap" />
+              Dashboard
+            </a>
+          </li>
+          <li>
+            <a routerLink="/movies" class="selected block py-2 w-40 flex items-center gap-3">
+              <ng-icon name="bootstrapCollectionPlay" />
+              Filmes
+            </a>
+          </li>
+          <li>
+            <a routerLink="/users" class="block py-2 w-40 flex items-center gap-3">
+              <ng-icon name="bootstrapPeople" />
+              Usuários
+            </a>
+          </li>
+          <li class="mt-30 border-t border-gray-700">
+            <a routerLink="/settings" class="block py-2 w-40 flex items-center gap-3">
+              <ng-icon name="bootstrapSliders" />
+              Configurações
+            </a>
+          </li>
+        </ul>
+      </nav>
+    </aside>
+  </div>
+  <app-footer></app-footer>
+</div>

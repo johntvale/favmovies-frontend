@@ -1,1 +1,208 @@
-<p>login works!</p>
+<div class="login-page">
+  <div class="filter-30">
+    <header class="bg-slate-900 w-full">
+      <nav class="flex justify-between items-center px-10 py-4">
+        <a routerLink="/">
+          <span class="text-2xl text-white font-medium">FAVMOVIES</span>
+        </a>
+        <div>
+          <form
+            [formGroup]="loginForm"
+            (ngSubmit)="onSubmitLogin()"
+            class="flex flex-wrap md:flex-nowrap items-center gap-3"
+          >
+            <div class="flex flex-col md:flex-row gap-3 flex-1">
+              <div class="flex flex-col text-white relative">
+                <input
+                  type="email"
+                  id="loginEmail"
+                  name="email"
+                  formControlName="email"
+                  placeholder="Digite seu e-mail"
+                  class="border border-slate-300 placeholder:text-slate-400 outline-none focus:outline-none"
+                  [ngClass]="{
+                    'ring-1 ring-green-500 focus:ring-1 focus:ring-green-500': loginForm.controls['email'].valid && loginForm.controls['email'].touched
+                  }"
+                  required
+                />
+                @if (loginForm.controls['email'].invalid && loginForm.controls['email'].touched) {
+                  <div class="absolute top-[50px] z-10 left-0 bg-red-500 text-white text-sm rounded px-3 py-2 shadow-lg">
+                    @if (loginForm.controls['email'].hasError('required')) {
+                      <div>Email é obrigatório.</div>
+                    }
+                    @if (loginForm.controls['email'].hasError('email')) {
+                      <div>Email inválido.</div>
+                    }
+                  </div>
+                }
+              </div>
+              <div class="flex flex-col text-white relative">
+                <input
+                  type="password"
+                  id="loginPassword"
+                  name="password"
+                  formControlName="password"
+                  placeholder="Digite sua senha"
+                  class="border border-slate-300 placeholder:text-slate-400 outline-none focus:outline-none"
+                  [ngClass]="{
+                    'ring-1 ring-green-500 focus:ring-1 focus:ring-green-500': loginForm.controls['password'].valid && loginForm.controls['password'].touched
+                  }"
+                  autocomplete="current-password"
+                  required
+                />
+              
+                @if (loginForm.controls['password'].invalid && loginForm.controls['password'].touched) {
+                  <div class="absolute top-[50px] z-10 left-0 bg-red-500 text-white text-sm rounded px-3 py-2 shadow-lg">
+                    @if (loginForm.controls['password'].hasError('required')) {
+                      <div>Senha é obrigatória.</div>
+                    }
+                    @if (loginForm.controls['password'].hasError('minlength')) {
+                      <div>Senha deve ter pelo menos 6 caracteres.</div>
+                    }
+                    @if (loginForm.controls['password'].hasError('maxlength')) {
+                      <div>Senha deve ter no máximo 30 caracteres.</div>
+                    }
+                    @if (loginForm.controls['password'].hasError('pattern')) {
+                      <div>A senha deve conter: Letras minúsculas, maiúsculas, números e caracteres especiais.</div>
+                    }
+                  </div>
+                }
+              </div>              
+            </div>
+            <button
+              type="submit"
+              class="primary-button"
+              [disabled]="loginForm.invalid"
+            >
+              Login
+            </button>
+          </form>
+        </div>
+      </nav>
+    </header>
+    <main class="rounded-lg shadow-lg px-10 mx-20">
+      <div class="flex flex-row justify-center items-center text-white mx-10">
+        <div class="flex flex-col w-[50%] mr-10">
+          <h1 class="text-4xl text-center mb-6">
+            Bem-vindo ao FAVMOVIES
+          </h1>
+          <p class="text-6xl font-light text-center mb-6">
+            Descubra. Assista. <strong class="font-medium">Favorite.</strong>
+          </p>
+          <p class="mb-6 text-center">
+            Entre no universo dos maiores sucessos do cinema!
+            <br>
+            <strong>Crie sua conta</strong> agora mesmo e fique por dentro dos lançamentos dos filmes <strong>MAIS ÉPICOS</strong> todos os tempos.
+          </p>
+        </div>
+
+        <div class="flex flex-col w-[50%] bg-white/10 backdrop-blur-lg rounded-lg px-10 py-6">
+          <h2 class="text-xl text-center mb-10">
+            Você está prestes a assistir o <strong>Futuro</strong>.
+            <br>
+            A sua aventura começa agora!
+          </h2>
+          <form
+            [formGroup]="registerForm"
+            (ngSubmit)="onSubmitRegister()"
+            class="flex flex-col md:flex-nowrap items-center gap-3"
+            >
+            <div class="flex flex-col">
+              <input
+                type="text"
+                id="name"
+                name="name"
+                formControlName="name"
+                placeholder="Digite seu nome"
+                class="border border-slate-300 placeholder:text-slate-400 outline-none focus:outline-none"
+                [ngClass]="{
+                  'ring-1 ring-green-500 focus:ring-1 focus:ring-green-500': registerForm.controls['name'].valid && registerForm.controls['name'].touched
+                }"
+                required
+              />
+              @if (registerForm.controls['name'].invalid && registerForm.controls['name'].touched) {
+                <div class="absolute top-36 z-10 left-25 bg-red-500 text-white text-sm rounded px-3 py-2 shadow-lg">
+                  @if (registerForm.controls['name'].hasError('required')) {
+                    <div>Nome é obrigatório.</div>
+                  }
+                  @if (registerForm.controls['name'].hasError('minlength')) {
+                    <div>Nome deve ter pelo menos 6 caracteres.</div>
+                  }
+                  @if (registerForm.controls['name'].hasError('maxlength')) {
+                    <div>Nome deve ter no máximo 30 caracteres.</div>
+                  }
+                </div>
+              }
+            </div>
+
+            <div class="flex flex-col">
+              <input
+                type="email"
+                id="email"
+                name="email"
+                formControlName="email"
+                placeholder="Digite seu e-mail"
+                class="border border-slate-300 placeholder:text-slate-400 outline-none focus:outline-none"
+                [ngClass]="{
+                  'ring-1 ring-green-500 focus:ring-1 focus:ring-green-500': registerForm.controls['email'].valid && registerForm.controls['email'].touched
+                }"
+                required
+              />
+              @if (registerForm.controls['email'].invalid && registerForm.controls['email'].touched) {
+                <div class="absolute top-49 z-10 left-25 bg-red-500 text-white text-sm rounded px-3 py-2 shadow-lg">
+                  @if (registerForm.controls['email'].hasError('required')) {
+                    <div>Email é obrigatório.</div>
+                  }
+                  @if (registerForm.controls['email'].hasError('email')) {
+                    <div>Email inválido.</div>
+                  }
+                </div>
+              }
+            </div>
+
+            <div class="flex flex-col">
+              <input
+                type="password"
+                id="password"
+                name="password"
+                formControlName="password"
+                placeholder="Digite sua senha"
+                class="border border-slate-300 placeholder:text-slate-400 outline-none focus:outline-none"
+                [ngClass]="{
+                  'ring-1 ring-green-500 focus:ring-1 focus:ring-green-500': registerForm.controls['password'].valid && registerForm.controls['password'].touched
+                }"
+                autocomplete="current-password"
+                required
+              />
+              @if (registerForm.controls['password'].invalid && registerForm.controls['password'].touched) {
+                <div class="absolute top-63 z-10 left-25 bg-red-500 text-white text-sm rounded px-3 py-2 shadow-lg">
+                  @if (registerForm.controls['password'].hasError('required')) {
+                    <div>Senha é obrigatória.</div>
+                  }
+                  @if (registerForm.controls['password'].hasError('minlength')) {
+                    <div>Senha deve ter pelo menos 6 caracteres.</div>
+                  }
+                  @if (registerForm.controls['password'].hasError('maxlength')) {
+                    <div>Senha deve ter no máximo 30 caracteres.</div>
+                  }
+                  @if (registerForm.controls['password'].hasError('pattern')) {
+                    <div>A senha deve conter: Letras minúsculas, maiúsculas, números e caracteres especiais.</div>
+                  }
+                </div>
+              }
+            </div>
+          
+            <button
+              type="submit"
+              class="primary-button mt-5"
+              [disabled]="registerForm.invalid"
+            >
+              Registrar
+            </button>
+          </form>
+        </div>
+      </div>  
+    </main>
+    <app-footer class="w-full"></app-footer>
+  </div>
+</div>

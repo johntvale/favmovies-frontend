@@ -1,1 +1,22 @@
-<p>header works!</p>
+<header class="bg-slate-900">
+  <nav class="flex justify-between items-center px-10 py-4">
+    <a routerLink="/">
+      <span class="text-2xl text-white font-medium">FAVMOVIES</span>
+    </a>
+    <span class="text-xl">Painel Administrativo</span>
+    <ul class="flex row gap-6 items-center">
+      <li class="flex row gap-3 items-center">
+        <span>Seja bem vindo, John</span>
+        <a routerLink="/profile">
+          <img src="https://cdn-icons-png.flaticon.com/512/149/149071.png" alt="Profile Icon" width="36" height="36">
+        </a>
+      </li>
+      <li>
+        <button type="button" class="secondary-button flex items-center gap-3">
+          SAIR
+          <ng-icon name="bootstrapBoxArrowRight" />
+        </button>
+      </li>
+    </ul>
+  </nav>
+</header>

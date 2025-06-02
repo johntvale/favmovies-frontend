@@ -1,8 +1,17 @@
 import { Component } from '@angular/core';
+import { NgIcon, provideIcons } from '@ng-icons/core';
+import { bootstrapCollectionPlay, bootstrapPeople, bootstrapColumnsGap, bootstrapSliders, bootstrapBoxArrowRight } from '@ng-icons/bootstrap-icons';
+import { FooterComponent } from "../../components/footer/footer.component";
+import { HeaderComponent } from "../../components/header/header.component";
 
 @Component({
   selector: 'app-admin',
-  imports: [],
+  imports: [
+    NgIcon,
+    FooterComponent,
+    HeaderComponent,
+],
+  viewProviders: [provideIcons({ bootstrapCollectionPlay, bootstrapPeople, bootstrapColumnsGap, bootstrapSliders, bootstrapBoxArrowRight })],
   templateUrl: './admin.component.html',
   styleUrl: './admin.component.css'
 })

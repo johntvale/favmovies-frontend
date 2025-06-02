@@ -1,0 +1,8 @@
+.admin-page {
+  background-color: #1e293b; /* slate-950 */
+  color: #e2e8f0; /* slate-200 */
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
