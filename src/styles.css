@@ -5,12 +5,11 @@ a {
 }
 
 input {
-  @apply bg-slate-800 text-white px-3 py-2 rounded border border-slate-700 focus:drop-shadow-[0_0_2px_white] focus:drop-shadow-[0_0_4px_white] focus:drop-shadow-[0_0_6px_white] transition w-[250px];
+  @apply bg-slate-800 text-sm text-white px-4 py-2 rounded border border-slate-700 focus:drop-shadow-[0_0_2px_white] focus:drop-shadow-[0_0_4px_white] focus:drop-shadow-[0_0_6px_white] transition w-full;
 }
   
 button {
-  @apply outline-none focus:bg-blue-700;
-
+  @apply bg-green-600 text-white text-sm px-5 py-2 rounded-md hover:bg-green-700 disabled:opacity-50 disabled:cursor-not-allowed transition;
 }
 
 .selected {
@@ -19,7 +18,7 @@ button {
 }
 
 .primary-button {
-  @apply bg-blue-600 text-white px-5 py-2 rounded transition hover:bg-blue-700 transition disabled:opacity-50;
+  @apply bg-green-600 text-white px-5 py-2 rounded transition hover:bg-green-700 transition disabled:opacity-50;
 }
 
 .secondary-button {
@@ -32,4 +31,18 @@ button {
 
 .danger-button {
   @apply bg-red-600 text-white px-5 py-2 rounded transition hover:bg-red-700 disabled:opacity-50;
+}
+
+.custom-toast {
+  @apply bg-slate-800 text-white px-4 py-3 rounded shadow-lg text-sm z-[9999] fixed right-10 bottom-10 min-w-[300px] w-fit max-w-sm flex flex-row-reverse items-center justify-around;
+}
+
+.toast-success {
+  @apply bg-green-600 border-green-500;
+}
+.toast-error {
+  @apply bg-red-600 border-red-500;
+}
+.toast-warning {
+  @apply bg-yellow-500 text-black border-yellow-600;
 }

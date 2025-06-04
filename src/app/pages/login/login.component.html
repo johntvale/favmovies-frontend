@@ -26,7 +26,7 @@
                   required
                 />
                 @if (loginForm.controls['email'].invalid && loginForm.controls['email'].touched) {
-                  <div class="absolute top-[50px] z-10 left-0 bg-red-500 text-white text-sm rounded px-3 py-2 shadow-lg">
+                  <div class="absolute top-full mt-1 z-10 left-0 bg-red-500 text-white text-xs rounded px-3 py-1 shadow">
                     @if (loginForm.controls['email'].hasError('required')) {
                       <div>Email é obrigatório.</div>
                     }
@@ -52,7 +52,7 @@
                 />
               
                 @if (loginForm.controls['password'].invalid && loginForm.controls['password'].touched) {
-                  <div class="absolute top-[50px] z-10 left-0 bg-red-500 text-white text-sm rounded px-3 py-2 shadow-lg">
+                  <div class="absolute top-full mt-1 z-10 left-0 bg-red-500 text-white text-xs rounded px-3 py-1 shadow">
                     @if (loginForm.controls['password'].hasError('required')) {
                       <div>Senha é obrigatória.</div>
                     }
@@ -83,10 +83,10 @@
     <main class="rounded-lg shadow-lg px-10 mx-20">
       <div class="flex flex-row justify-center items-center text-white mx-10">
         <div class="flex flex-col w-[50%] mr-10">
-          <h1 class="text-4xl text-center mb-6">
+          <h1 class="text-4xl md:text-5xl text-center mb-6 font-bold">
             Bem-vindo ao FAVMOVIES
           </h1>
-          <p class="text-6xl font-light text-center mb-6">
+          <p class="text-3xl md:text-4xl font-light text-center mb-6 leading-snug">
             Descubra. Assista. <strong class="font-medium">Favorite.</strong>
           </p>
           <p class="mb-6 text-center">
@@ -96,11 +96,11 @@
           </p>
         </div>
 
-        <div class="flex flex-col w-[50%] bg-white/10 backdrop-blur-lg rounded-lg px-10 py-6">
+        <div class="flex flex-col w-full max-w-md bg-white/10 backdrop-blur-lg rounded-lg px-8 py-6 mx-auto shadow-lg">
           <h2 class="text-xl text-center mb-10">
-            Você está prestes a assistir o <strong>Futuro</strong>.
+            Faça seu cadastro e tenha acesso imediato.
             <br>
-            A sua aventura começa agora!
+            <strong>A sua aventura começa agora!</strong>
           </h2>
           <form
             [formGroup]="registerForm"
@@ -121,7 +121,7 @@
                 required
               />
               @if (registerForm.controls['name'].invalid && registerForm.controls['name'].touched) {
-                <div class="absolute top-36 z-10 left-25 bg-red-500 text-white text-sm rounded px-3 py-2 shadow-lg">
+                <div class="absolute top-full mt-1 z-10 left-0 bg-red-500 text-white text-xs rounded px-3 py-1 shadow">
                   @if (registerForm.controls['name'].hasError('required')) {
                     <div>Nome é obrigatório.</div>
                   }
@@ -149,7 +149,7 @@
                 required
               />
               @if (registerForm.controls['email'].invalid && registerForm.controls['email'].touched) {
-                <div class="absolute top-49 z-10 left-25 bg-red-500 text-white text-sm rounded px-3 py-2 shadow-lg">
+                <div class="absolute top-full mt-1 z-10 left-0 bg-red-500 text-white text-xs rounded px-3 py-1 shadow">
                   @if (registerForm.controls['email'].hasError('required')) {
                     <div>Email é obrigatório.</div>
                   }
@@ -175,7 +175,7 @@
                 required
               />
               @if (registerForm.controls['password'].invalid && registerForm.controls['password'].touched) {
-                <div class="absolute top-63 z-10 left-25 bg-red-500 text-white text-sm rounded px-3 py-2 shadow-lg">
+                <div class="absolute top-full mt-1 z-10 left-0 bg-red-500 text-white text-xs rounded px-3 py-1 shadow">
                   @if (registerForm.controls['password'].hasError('required')) {
                     <div>Senha é obrigatória.</div>
                   }
