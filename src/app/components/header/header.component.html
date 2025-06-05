@@ -1,22 +1,29 @@
-<header class="bg-slate-900">
-  <nav class="flex justify-between items-center px-10 py-4">
+<header class="bg-slate-900 w-full">
+  <nav class="flex justify-between items-center px-10 py-3">
     <a routerLink="/">
       <span class="text-2xl text-white font-medium">FAVMOVIES</span>
     </a>
-    <span class="text-xl">Painel Administrativo</span>
+    @if (showAdminPanel) {
+      <span class="text-xl text-white">Painel Administrativo</span>
+    }
     <ul class="flex row gap-6 items-center">
-      <li class="flex row gap-3 items-center">
-        <span>Seja bem vindo, John</span>
-        <a routerLink="/profile">
-          <img src="https://cdn-icons-png.flaticon.com/512/149/149071.png" alt="Profile Icon" width="36" height="36">
-        </a>
-      </li>
-      <li>
-        <button (click)="logout()" type="button" class="cursor-pointer secondary-button flex items-center gap-3">
-          SAIR
-          <ng-icon name="bootstrapBoxArrowRight" />
-        </button>
-      </li>
+      @if (showUserProfile) {
+        <li>
+          <app-user-profile></app-user-profile>
+        </li>
+      }
+      @if (showAdminPanel || showUserProfile) {
+        <li>
+          <button (click)="logout()" type="button" class="cursor-pointer secondary-button flex items-center gap-3">
+            SAIR
+            <ng-icon name="bootstrapBoxArrowRight" />
+          </button>
+        </li>
+      } @else {
+        <li>
+          <app-login-form></app-login-form>
+        </li>
+      }
     </ul>
   </nav>
 </header>
