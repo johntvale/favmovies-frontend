@@ -1,24 +1,25 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { map, Observable, tap } from 'rxjs';
+import { Observable } from 'rxjs';
+import { iResponseAuth } from '../interfaces/auth.intercace';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  apiUrl: string = 'http://localhost:3001';
+  apiUrl: string = 'http://localhost:3001/auth';
 
   constructor(private http: HttpClient) { }
   
-  login(userData: { email: string, password: string }): Observable<any> {
-    return this.http.post(`${this.apiUrl}/auth/login`, userData, { withCredentials: true });
+  login(userData: { email: string, password: string }): Observable<iResponseAuth> {
+    return this.http.post<iResponseAuth>(`${this.apiUrl}/login`, userData, { withCredentials: true });
   }
 
-  logout(): Observable<any> {
-    return this.http.post(`${this.apiUrl}/auth/logout`, {}, { withCredentials: true });
+  logout(): Observable<iResponseAuth> {
+    return this.http.post<iResponseAuth>(`${this.apiUrl}/logout`, {}, { withCredentials: true });
   }
 
   getCurrentUser(): Observable<any> {
-    return this.http.get(`${this.apiUrl}/auth/me`, { withCredentials: true })
+    return this.http.get(`${this.apiUrl}/me`, { withCredentials: true })
   }
 }

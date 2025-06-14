@@ -1,13 +1,15 @@
 import { Injectable } from '@angular/core';
 import { CanActivate, Router, UrlTree } from '@angular/router';
-import { Observable, map, catchError, of, tap } from 'rxjs';
+import { Observable, map, catchError, of } from 'rxjs';
 import { AuthService } from '../services/auth.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Injectable({
   providedIn: 'root'
 })
+
 export class RedirectGuard implements CanActivate {
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor(private authService: AuthService, private router: Router, private toastr: ToastrService) {}
 
   canActivate(): Observable<boolean | UrlTree> {
     return this.authService.getCurrentUser().pipe(
@@ -17,7 +19,8 @@ export class RedirectGuard implements CanActivate {
 
         return this.router.parseUrl('/login');
       }),
-      catchError(() => {        
+      catchError(() => {
+        this.toastr.error('Usuário não autenticado');
         return of(this.router.parseUrl('/login'));
       })
     );

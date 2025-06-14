@@ -1,5 +1,12 @@
 @import "tailwindcss";
 
+.container-section {
+  max-width: 1200px;
+  margin: auto;
+  color: white;
+  user-select: none
+}
+
 header a, aside a {
   @apply transition duration-200 hover:drop-shadow-[0_0_2px_white] hover:drop-shadow-[0_0_4px_white] hover:drop-shadow-[0_0_6px_white] cursor-pointer;
 }
@@ -9,43 +16,66 @@ input {
 }
   
 button {
-  @apply bg-green-600 text-white text-sm px-5 py-2 rounded-md hover:bg-green-700 disabled:opacity-50 disabled:cursor-not-allowed transition;
+  @apply bg-green-600 text-white text-sm font-medium px-5 py-2 rounded-md hover:bg-green-700 disabled:opacity-50 disabled:cursor-not-allowed transition duration-200 ease-in-out;
 }
 
 .selected {
-  @apply font-bold bg-slate-800 text-white;
+  @apply font-bold bg-teal-700 text-white;
 }
 
 .primary-button {
-  @apply bg-green-600 text-white px-5 py-2 rounded transition hover:bg-green-700 transition disabled:opacity-50;
+  @apply cursor-pointer bg-teal-500 text-white px-5 py-2 rounded transition hover:bg-teal-600 transition disabled:opacity-50;
 }
 
 .secondary-button {
-  @apply bg-blue-600 text-white px-5 py-2 rounded transition hover:bg-blue-700 disabled:opacity-50;
+  @apply cursor-pointer bg-blue-500 text-white px-5 py-2 rounded transition hover:bg-blue-600 disabled:opacity-50;
 }
 
 .warning-button {
-  @apply bg-yellow-500 text-white px-5 py-2 rounded transition hover:bg-yellow-600 disabled:opacity-50;
+  @apply cursor-pointer bg-amber-500 text-black px-5 py-2 rounded transition hover:bg-amber-600 disabled:opacity-50;
 }
 
 .danger-button {
-  @apply bg-red-600 text-white px-5 py-2 rounded transition hover:bg-red-700 disabled:opacity-50;
-}
-
-.danger-button button {
-  @apply bg-red-600 text-white px-5 py-2 rounded transition hover:bg-red-700;
+  @apply cursor-pointer bg-red-600 text-white px-5 py-2 rounded transition hover:bg-red-700 disabled:opacity-50;
 }
 
 .custom-toast {
   @apply bg-slate-800 text-white px-4 py-3 rounded shadow-lg text-sm z-[9999] fixed right-10 bottom-10 min-w-[300px] w-fit max-w-sm flex flex-row-reverse items-center justify-around;
 }
 
+.toast-success, .toast-error, .toast-danger, .toast-warning, .toast-success button,
+.toast-error button, .toast-danger button, .toast-warning button {
+  @apply border border-1 gap-2;
+}
+
 .toast-success {
-  @apply bg-green-600 border-green-500;
+  @apply bg-teal-600 border-teal-500 text-white;
 }
+
+.toast-success button {
+  @apply bg-teal-600 border-teal-500 hover:bg-teal-700;
+}
+
 .toast-error {
-  @apply bg-red-600 border-red-500;
+  @apply bg-red-600 border-red-500 text-white;
 }
+
+.toast-error button {
+  @apply bg-red-600 border-red-500 hover:bg-red-700;
+}
+
+.toast-danger {
+  @apply bg-rose-600 border-rose-500 text-white;
+}
+
+.toast-danger button {
+  @apply bg-rose-600 border-rose-500 hover:bg-rose-700;
+}
+
 .toast-warning {
-  @apply bg-yellow-500 text-black border-yellow-600;
+  @apply bg-amber-500 border-amber-600 text-black;
+}
+
+.toast-warning button {
+  @apply bg-amber-600 border-amber-700 hover:bg-amber-700;
 }

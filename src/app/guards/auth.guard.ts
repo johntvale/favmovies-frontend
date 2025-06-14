@@ -1,19 +1,26 @@
 import { AuthService } from './../services/auth.service';
 import { Injectable } from '@angular/core';
 import { CanActivate, Router, UrlTree } from '@angular/router';
-import { catchError, map, Observable, of, tap } from 'rxjs';
+import { ToastrService } from 'ngx-toastr';
+import { catchError, map, Observable, of } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 
 export class AuthGuard implements CanActivate {
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor(private authService: AuthService, private router: Router, private toastr: ToastrService) {}
 
   canActivate(): Observable<boolean | UrlTree> {
     return this.authService.getCurrentUser().pipe(
       map(result => !!result.user),
-      catchError(() => of(this.router.parseUrl('/login')))
+      catchError((error) => {
+        if (error.status === 401) {
+          this.toastr.error('Usuário não autenticado');
+        }
+        this.toastr.error('Erro ao verificar autenticação.');
+        return of(this.router.parseUrl('/login'));
+      })
     );
   }
 }

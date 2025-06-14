@@ -56,8 +56,9 @@ export class HeaderComponent {
         this.toastr.success('Usuário desconectado com sucesso');
         this.router.navigate(['/login']);
       },
-      error: (error) => {
-        console.error('Logout failed', error);
+      error: () => {
+        this.toastr.error('Usuário desconetado ou Token inválido');
+        this.router.navigate(['/login']);
       }
     });
   }

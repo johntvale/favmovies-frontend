@@ -1,6 +1,6 @@
-<header class="bg-slate-900 w-full">
+<header class="bg-slate-900 w-full select-none">
   <nav class="flex justify-between items-center px-10 py-3">
-    <a routerLink="/">
+    <a href="#">
       <span class="text-2xl text-white font-medium">FAVMOVIES</span>
     </a>
     @if (showAdminPanel) {
@@ -14,7 +14,7 @@
       }
       @if (showAdminPanel || showUserProfile) {
         <li>
-          <button (click)="logout()" type="button" class="cursor-pointer secondary-button flex items-center gap-3">
+          <button (click)="logout()" type="button" class="primary-button flex items-center gap-3">
             SAIR
             <ng-icon name="bootstrapBoxArrowRight" />
           </button>

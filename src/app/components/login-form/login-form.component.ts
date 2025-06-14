@@ -2,10 +2,10 @@ import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { RegexPatterns } from '../../shared/constants/regex.constants';
 import { AuthService } from '../../services/auth.service';
-import { UserService } from '../../services/user.service';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { NgClass } from '@angular/common';
+import { iResponseAuthWithUser } from '../../interfaces/auth.intercace';
 
 @Component({
   selector: 'app-login-form',
@@ -32,7 +32,6 @@ export class LoginFormComponent {
 
   constructor(
     private authService: AuthService,
-    private userService: UserService,
     private router: Router,
     private toastr: ToastrService
   ) {}
@@ -51,15 +50,19 @@ export class LoginFormComponent {
     this.authService.login(credentials).subscribe({
       next: () => {
         this.toastr.success('Login realizado com sucesso!');
-        
         this.authService.getCurrentUser().subscribe({
-          next: (user: any) => {
-            if (user.role === 'admin') this.router.navigate(['/admin']);
-            else if (user.role === 'user') this.router.navigate(['/movies']);
+          next: (response: iResponseAuthWithUser) => {
+            if (response.user.role === 'admin') this.router.navigate(['/admin']);
+            else if (response.user.role === 'user') this.router.navigate(['/movies']);
             else this.router.navigate(['/']);
           },
         });
       },
+      error: (error) => {
+        if (error.status === 401) this.toastr.error("Usuário ou Senha inválidos.");
+        if (error.status === 404) this.toastr.error("Usuário não encontrado.");
+        this.toastr.error(error.error.message);
+      }
     });
 
     this.loginForm.reset();

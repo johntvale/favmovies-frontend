@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { bootstrapBoxArrowRight, bootstrapCollectionPlay, bootstrapColumnsGap, bootstrapPeople, bootstrapSliders } from '@ng-icons/bootstrap-icons';
 import { NgIcon, provideIcons } from '@ng-icons/core';
 
@@ -12,5 +12,11 @@ import { NgIcon, provideIcons } from '@ng-icons/core';
   styleUrl: './aside-menu.component.css'
 })
 export class AsideMenuComponent {
+  @Input() active: string = '';
+  @Output() selectedSection = new EventEmitter<string>();
+
+  select(section: string) {
+    this.selectedSection.emit(section);
+  }
 
 }

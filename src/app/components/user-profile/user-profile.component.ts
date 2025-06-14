@@ -44,6 +44,5 @@ export class UserProfileComponent {
     const index = Math.floor(Math.random() * this.profileIcons.length);
     this.selectedIcon = this.profileIcons[index];
     this.isLoadingIcon = false;
-    console.log('Selected icon index:', this.profileIcons[index]);
   }
 }

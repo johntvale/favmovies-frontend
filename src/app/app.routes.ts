@@ -6,11 +6,12 @@ import { RedirectGuard } from './guards/redirect.guard';
 import { AuthGuard } from './guards/auth.guard';
 import { RoleGuard } from './guards/role.guard';
 import { LoadingComponent } from './loading/loading.component';
+import { NotFoundComponent } from './pages/not-found/not-found.component';
 
 export const routes: Routes = [
   { path: '', component: LoadingComponent, canActivate: [RedirectGuard] },
   { path: 'login', component: LoginComponent },
   { path: 'movies', canActivate: [AuthGuard], component: MoviesComponent },
   { path: 'admin', canActivate: [AuthGuard, RoleGuard], component: AdminComponent },
-  { path: '**', redirectTo: '/' }
+  { path: '**', component: NotFoundComponent }
 ];
