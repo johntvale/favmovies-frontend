@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
+import { NgClass } from '@angular/common';
+import { ToastrService } from 'ngx-toastr';
+
 import { RegexPatterns } from '../../shared/constants/regex.constants';
 import { AuthService } from '../../services/auth.service';
-import { Router } from '@angular/router';
-import { ToastrService } from 'ngx-toastr';
-import { NgClass } from '@angular/common';
 import { iResponseAuthWithUser } from '../../interfaces/auth.intercace';
 
 @Component({

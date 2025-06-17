@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { NgIcon, provideIcons } from '@ng-icons/core';
 import { bootstrapCollectionPlay, bootstrapPeople, bootstrapColumnsGap, bootstrapSliders, bootstrapBoxArrowRight } from '@ng-icons/bootstrap-icons';
 import { ToastrService } from 'ngx-toastr';
-import { Router } from '@angular/router';
 
 import { AuthService } from '../../services/auth.service';
 import { UserProfileComponent } from "../user-profile/user-profile.component"

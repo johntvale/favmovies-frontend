@@ -1,12 +1,9 @@
 <div class="admin-page bg-[linear-gradient(to_bottom_right,rgba(30,41,59,1),rgba(30,41,59,0.95),rgba(30,41,59,1))]">
   <app-header class="mb-8"></app-header>
   <div class="container-page">
-    <app-aside-menu
-      [active]="activeSection"
-      (selectedSection)="onSectionSelected($event)"
-    ></app-aside-menu>
+    <app-aside-menu></app-aside-menu>
     <main class="min-h-100 text-slate-100 w-full">
-      <div class="min-h-[400px] rounded-lg bg-slate-900 p-4 mx-4 mr-20" [ngSwitch]="activeSection">
+      <div class="min-h-[400px] rounded-lg bg-slate-900 p-4 mx-4 mr-20" [ngSwitch]="activeSection()">
         <div *ngSwitchCase="'dashboard'">
           <app-dashboard></app-dashboard>
         </div>

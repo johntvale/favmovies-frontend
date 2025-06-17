@@ -79,3 +79,7 @@ button {
 .toast-warning button {
   @apply bg-amber-600 border-amber-700 hover:bg-amber-700;
 }
+
+.loading-container {
+  @apply flex flex-row items-center justify-center bg-slate-800 h-screen;
+}

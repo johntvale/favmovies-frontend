@@ -21,6 +21,7 @@
           'ring-1 ring-green-500 focus:ring-1 focus:ring-green-500': registerForm.controls['name'].valid && registerForm.controls['name'].touched
         }"
         required
+        autocomplete="name"
       />
       @if (registerForm.controls['name'].invalid && registerForm.controls['name'].touched) {
         <div class="absolute top-full mt-1 z-10 left-0 bg-red-500 text-white text-xs rounded px-3 py-1 shadow">
@@ -49,6 +50,7 @@
           'ring-1 ring-green-500 focus:ring-1 focus:ring-green-500': registerForm.controls['email'].valid && registerForm.controls['email'].touched
         }"
         required
+        autocomplete="email"
       />
       @if (registerForm.controls['email'].invalid && registerForm.controls['email'].touched) {
         <div class="absolute top-full mt-1 z-10 left-0 bg-red-500 text-white text-xs rounded px-3 py-1 shadow">
@@ -73,8 +75,8 @@
         [ngClass]="{
           'ring-1 ring-green-500 focus:ring-1 focus:ring-green-500': registerForm.controls['password'].valid && registerForm.controls['password'].touched
         }"
-        autocomplete="current-password"
         required
+        autocomplete="current-password"
       />
       @if (registerForm.controls['password'].invalid && registerForm.controls['password'].touched) {
         <div class="absolute top-full mt-1 z-10 left-0 bg-red-500 text-white text-xs rounded px-3 py-1 shadow">

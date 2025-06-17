@@ -1,3 +1,13 @@
+export interface iBasicMovie {
+  title: string,
+  description: string,
+  category: string[],
+  releaseDate: Date,
+  director?: string,
+  imageUrl: string,
+  cast?: string[]
+}
+
 export interface iMovie {
   title: string,
   description: string,
@@ -23,15 +33,6 @@ export interface iMovie {
   viewCount?: number
 }
 
-export interface iBasicMovie {
-  title: string,
-  description: string,
-  category: string[],
-  releaseDate: Date,
-  director?: string,
-  imageUrl: string,
-  cast?: string[]
-}
 
 export interface iResponseMovie {
   message: string,

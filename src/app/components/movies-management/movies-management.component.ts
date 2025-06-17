@@ -1,6 +1,7 @@
 import { Component, HostListener } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+
 import { MOVIE_LIST } from '../../shared/constants/movies-mockup.constants';
 
 @Component({
@@ -16,23 +17,17 @@ export class MoviesManagementComponent {
   paginatedMovies: any[] = [];
   searchQuery: string = '';
   lastSearchQuery: string | null = null;
+  isDetailsModalOpen = false;
+  selectedMovie: any = null;
+  isModalOpen = false;
+  isEditing = false;
+  currentMovie = this.getEmptyMovie();
+  isDeleteModalOpen = false;
 
-  // Paginação
   page = 1;
   itemsPerPage = 10;
   totalPages = 1;
 
-  // Modal Details
-  isDetailsModalOpen = false;
-  selectedMovie: any = null;
-
-  // Modal Edit/Add
-  isModalOpen = false;
-  isEditing = false;
-  currentMovie = this.getEmptyMovie();
-
-  // Modal Delete
-  isDeleteModalOpen = false;
 
   constructor() {
     this.loadMovies();

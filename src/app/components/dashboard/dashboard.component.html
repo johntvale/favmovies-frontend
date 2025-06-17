@@ -1,260 +1,186 @@
 <div class="container-section">
-  <div class="container">
-
-    <!-- Filme mais favoritado -->
-    <div class="card mais-favoritado">
-      <h3 class="section-title">Filme mais Favoritado no mês de Junho</h3>
-      <div class="movie movie-ranked">
-        <div class="movie-poster mb-2">
-          <img src="https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcSIUfdySawxK4dbASkVb4zNpqEToBFEpHN-fgJciLL1-mnRZwEQ" alt="Filme Mais Favoritado">
-          <div class="overlay"></div>
+  @if (isLoadingInsights) {
+    <app-loading class="loading-container h-full"></app-loading>
+  } @else {
+    <div class="grid grid-cols-4 gap-4">
+      <app-movie-card [movie]="favorites().favoriteMovieOfTheMonth" [highlight]=true cardType="Favoritado" labelType="Marcações" cardSize="large" rankType=""></app-movie-card>
+      
+      <!-- Top 3 Filmes Mais Favoritados -->
+      <div class="bg-slate-800 rounded-2xl p-4 col-span-2">
+        <h3 class="text-lg font-semibold border-b border-[#334155] pb-2 mb-8">Top 3 Filmes Mais Favoritados</h3>
+        <div class="top-movies-ranked flex gap-4">
+          <app-movie-card [movie]="favorites().top3Favorites[0]" labelType="Marcações" cardSize="small" rankType="gold"></app-movie-card>
+          <app-movie-card [movie]="favorites().top3Favorites[1]" labelType="Marcações" cardSize="small" rankType="silver"></app-movie-card>
+          <app-movie-card [movie]="favorites().top3Favorites[2]" labelType="Marcações" cardSize="small" rankType="bronze"></app-movie-card>
         </div>
-        <p class="movie-title">Capitão América: Admirável Mundo Novo</p>
-        <div class="flex justify-center">
-          <div class="flex flex-row justify-center gap-3 movie-count-view-fav">
-            <img src="assets/icons/add-favorite.svg" class="my-auto rounded-none!" alt="">
-            <div class="">
-              <p class="movie-count text-teal-400!">
-                <strong class="text-teal-400!">15.678</strong>
-              </p>
-              <p class="movie-count-label">Marcações</p>
-            </div>
+      </div>
+
+      <!-- 1 - Insights em Cards verticais -->
+      <div class="card flex flex-col justify-around gap-3">
+        <div class="stat-card hover:bg-teal-900! transition duration-200">
+          <div class="stat-icon">
+            <img src="assets/icons/movie-open-plus-outline.svg" alt="">
+          </div>
+          <div class="stat-content">
+            <h4>Filmes Cadastrados</h4>
+            <span class="stat-number text-teal-400!">2.500</span>
+          </div>
+        </div>
+        <div class="stat-card hover:bg-teal-900! transition duration-200">
+          <div class="stat-icon">
+            <img src="assets/icons/movie-open-play-outline.svg" width="92]]" height="92]]" alt="">
+          </div>
+          <div class="stat-content">
+            <h4>Total de favoritos na plataforma</h4>
+            <span class="stat-number text-teal-400!">1350</span>
+          </div>
+        </div>
+        <div class="stat-card hover:bg-teal-900! transition duration-200">
+          <div class="stat-icon">
+            <img src="assets/icons/movie-open-edit-outline.svg" alt="">
+          </div>
+          <div class="stat-content">
+            <h4>Marcados como "Assistir Mais Tarde"</h4>
+            <span class="stat-number text-teal-400!">576</span>
           </div>
         </div>
       </div>
-    </div>
 
-    <!-- Top 3 Filmes Mais Favoritados -->
-    <div class="card card-wide">
-      <h3 class="section-title">Top 3 Filmes Mais Favoritados</h3>
-      <div class="top-movies-ranked">
-        <div class="movie movie-ranked">
-          <div class="movie-poster">
-            <span class="rank bg-teal-100/20 rounded">🥇</span>
-            <img src="https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcRLQuI0X8NscBlrIWc2OrKShNy9yHMk_SX3uJKP7Z9jLELQTd4Y" alt="Filme 1">
-            <div class="overlay"></div>
-          </div>
-          <p class="movie-title">Warlord</p>
-          <div class="flex justify-center">
-            <div class="flex flex-row justify-center gap-3 movie-count-view-fav">
-              <img src="assets/icons/add-favorite.svg" class="my-auto rounded-none!" alt="">
-              <div class="">
-                <p class="movie-count text-teal-400!">
-                  <strong class="text-teal-400!">15.678</strong>
-                </p>
-                <p class="movie-count-label">Marcações</p>
+      <!-- Top 3 filmes mais assistidos -->
+      <div class="card card-wide">
+        <h3 class="text-lg font-semibold border-b border-[#334155] pb-2 mb-8">Top 3 Filmes Mais Assistidos</h3>
+        <div class="top-movies-ranked">
+          <div class="text-center flex-1 relative text-center relative">
+            <div class="movie-poster">
+              <span class="rank bg-teal-100/20 rounded">🥇</span>
+              <img class="w-full rounded-md mb-2 block" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRvyajhuPaksFnR5E0iAKxVI-KicvinZKjC0RMvJ5QjVK3oOnQJPS3kCYEZ908uRW3KYoM&usqp=CAU" alt="Filme 1">
+              <div class="overlay"></div>
+            </div>
+            <p class="movie-title">Pecadores</p>
+            <div class="flex items-center justify-center">
+              <div class="flex items-center gap-3 movie-count-view-fav">
+                <img src="/assets/icons/eye.svg" height="24" width="24" alt="icon_eye" class="my-auto">
+                <div>
+                  <p class="movie-count text-teal-400!"><strong class="text-teal-400!">15.000</strong></p>
+                  <p class="movie-count-label">Visualizações</p>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-        <div class="movie movie-ranked">
-          <div class="movie-poster">
-            <span class="rank bg-teal-100/20 rounded">🥈</span>
-            <img src="https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcSbl68mzH2TZCeabjVtweRpfU5tNxpIrC85aQGvfJHOZFn1Qwa3" alt="Filme 2">
-            <div class="overlay"></div>
-          </div>
-          <p class="movie-title">O Macaco</p>
-          <div class="flex justify-center">
-            <div class="flex flex-row justify-center gap-3 movie-count-view-fav">
-              <img src="assets/icons/add-favorite.svg" class="my-auto rounded-none!" alt="">
-              <div class="">
-                <p class="movie-count text-teal-400!">
-                  <strong class="text-teal-400!">15.678</strong>
-                </p>
-                <p class="movie-count-label">Marcações</p>
+          <div class="movie movie-ranked">
+            <div class="movie-poster">
+              <span class="rank bg-teal-100/20 rounded">🥈</span>
+              <img src="https://images.justwatch.com/poster/323393660/s718/back-in-action.jpg" alt="Filme 2">
+              <div class="overlay"></div>
+            </div>
+            <p class="movie-title">De Volta à Ação</p>
+            <div class="flex items-center justify-center">
+              <div class="flex items-center gap-3 movie-count-view-fav">
+                <img src="/assets/icons/eye.svg" height="24" width="24" alt="icon_eye" class="my-auto">
+                <div>
+                  <p class="movie-count text-teal-400!"><strong class="text-teal-400!">13.500</strong></p>
+                  <p class="movie-count-label">Visualizações</p>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-        <div class="movie movie-ranked">
-          <div class="movie-poster">
-            <span class="rank bg-teal-100/20 rounded">🥉</span>
-            <img src="https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcQpqXKThjRrUreH_-_Nfifil9JwALP9mWqCEChrZUK79-7bXcm2" alt="Filme 3">
-            <div class="overlay"></div>
-          </div>
-          <p class="movie-title">Novocaine: À Prova da Dor</p>
-          <div class="flex items-center justify-center">
-            <div>
-              <div>
-                <div class="flex items-center gap-3 movie-count-view-fav">
-                  <img src="assets/icons/add-favorite.svg" class="my-auto rounded-none!" alt="">
-                  <div>
-                    <p class="movie-count text-teal-400!"><strong class="text-teal-400!">9.210</strong></p>
-                    <p class="movie-count-label">Marcações</p>
-                  </div>
+          <div class="movie movie-ranked">
+            <div class="movie-poster">
+              <span class="rank bg-teal-100/20 rounded">🥉</span>
+              <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT0Wl7QN2rnypuYdjCb7mo0ooH_JcwlfQQtVQYKZ8YOWg4qkRYL" alt="Filme 3">
+              <div class="overlay"></div>
+            </div>
+            <p class="movie-title">Covil de Ladrões 2</p>
+            <div class="flex items-center justify-center">
+              <div class="flex items-center gap-3 movie-count-view-fav">
+                <img src="/assets/icons/eye.svg" height="24" width="24" alt="icon_eye" class="my-auto">
+                <div>
+                  <p class="movie-count text-teal-400!"><strong class="text-teal-400!">12.200</strong></p>
+                  <p class="movie-count-label">Visualizações</p>
                 </div>
               </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
 
-    <!-- 1 - Insights em Cards verticais -->
-    <div class="card flex flex-col justify-around gap-3">
-      <div class="stat-card hover:bg-teal-900! transition duration-200">
-        <div class="stat-icon">
-          <img src="assets/icons/movie-open-plus-outline.svg" alt="">
-        </div>
-        <div class="stat-content">
-          <h4>Filmes Cadastrados</h4>
-          <span class="stat-number text-teal-400!">2.500</span>
-        </div>
-      </div>
-      <div class="stat-card hover:bg-teal-900! transition duration-200">
-        <div class="stat-icon">
-          <img src="assets/icons/movie-open-play-outline.svg" width="92]]" height="92]]" alt="">
-        </div>
-        <div class="stat-content">
-          <h4>Total de favoritos na plataforma</h4>
-          <span class="stat-number text-teal-400!">1350</span>
-        </div>
-      </div>
-      <div class="stat-card hover:bg-teal-900! transition duration-200">
-        <div class="stat-icon">
-          <img src="assets/icons/movie-open-edit-outline.svg" alt="">
-        </div>
-        <div class="stat-content">
-          <h4>Marcados como "Assistir Mais Tarde"</h4>
-          <span class="stat-number text-teal-400!">576</span>
-        </div>
-      </div>
-    </div>
-
-    <!-- Top 3 filmes mais assistidos -->
-    <div class="card card-wide">
-      <h3 class="section-title">Top 3 Filmes Mais Assistidos</h3>
-      <div class="top-movies-ranked">
+      <!-- Filme Mais Assistido -->
+      <div class="card mais-assistido">
+        <h3 class="text-lg font-semibold border-b border-[#334155] pb-2 mb-8">Filme Mais Assistido</h3>
         <div class="movie movie-ranked">
-          <div class="movie-poster">
-            <span class="rank bg-teal-100/20 rounded">🥇</span>
-            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRvyajhuPaksFnR5E0iAKxVI-KicvinZKjC0RMvJ5QjVK3oOnQJPS3kCYEZ908uRW3KYoM&usqp=CAU" alt="Filme 1">
+          <div class="movie-poster mb-2">
+            <img src="https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcSIUfdySawxK4dbASkVb4zNpqEToBFEpHN-fgJciLL1-mnRZwEQ" alt="Filme Mais Assistido">
             <div class="overlay"></div>
           </div>
-          <p class="movie-title">Pecadores</p>
+          <p class="movie-title">Capitão América: Admirável Mundo Novo</p>
           <div class="flex items-center justify-center">
             <div class="flex items-center gap-3 movie-count-view-fav">
               <img src="/assets/icons/eye.svg" height="24" width="24" alt="icon_eye" class="my-auto">
               <div>
-                <p class="movie-count text-teal-400!"><strong class="text-teal-400!">15.000</strong></p>
-                <p class="movie-count-label">Visualizações</p>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="movie movie-ranked">
-          <div class="movie-poster">
-            <span class="rank bg-teal-100/20 rounded">🥈</span>
-            <img src="https://images.justwatch.com/poster/323393660/s718/back-in-action.jpg" alt="Filme 2">
-            <div class="overlay"></div>
-          </div>
-          <p class="movie-title">De Volta à Ação</p>
-          <div class="flex items-center justify-center">
-            <div class="flex items-center gap-3 movie-count-view-fav">
-              <img src="/assets/icons/eye.svg" height="24" width="24" alt="icon_eye" class="my-auto">
-              <div>
-                <p class="movie-count text-teal-400!"><strong class="text-teal-400!">13.500</strong></p>
-                <p class="movie-count-label">Visualizações</p>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="movie movie-ranked">
-          <div class="movie-poster">
-            <span class="rank bg-teal-100/20 rounded">🥉</span>
-            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT0Wl7QN2rnypuYdjCb7mo0ooH_JcwlfQQtVQYKZ8YOWg4qkRYL" alt="Filme 3">
-            <div class="overlay"></div>
-          </div>
-          <p class="movie-title">Covil de Ladrões 2</p>
-          <div class="flex items-center justify-center">
-            <div class="flex items-center gap-3 movie-count-view-fav">
-              <img src="/assets/icons/eye.svg" height="24" width="24" alt="icon_eye" class="my-auto">
-              <div>
-                <p class="movie-count text-teal-400!"><strong class="text-teal-400!">12.200</strong></p>
+                <p class="movie-count text-teal-400!"><strong class="text-teal-400!">15.678</strong></p>
                 <p class="movie-count-label">Visualizações</p>
               </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
 
-    <!-- Filme Mais Assistido -->
-    <div class="card mais-assistido">
-      <h3 class="section-title">Filme Mais Assistido</h3>
-      <div class="movie movie-ranked">
-        <div class="movie-poster mb-2">
-          <img src="https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcSIUfdySawxK4dbASkVb4zNpqEToBFEpHN-fgJciLL1-mnRZwEQ" alt="Filme Mais Assistido">
-          <div class="overlay"></div>
+      <!-- 2 - Insights em Cards verticais -->
+      <div class="card flex flex-col justify-around gap-3">
+        <div class="stat-card hover:bg-teal-900! transition duration-200">
+          <div class="stat-icon">
+            <img src="assets/icons/movie-open-plus-outline.svg" alt="">
+          </div>
+          <div class="stat-content">
+            <h4>Filmes Cadastrados</h4>
+            <span class="stat-number text-teal-400!">2.500</span>
+          </div>
         </div>
-        <p class="movie-title">Capitão América: Admirável Mundo Novo</p>
-        <div class="flex items-center justify-center">
-          <div class="flex items-center gap-3 movie-count-view-fav">
-            <img src="/assets/icons/eye.svg" height="24" width="24" alt="icon_eye" class="my-auto">
-            <div>
-              <p class="movie-count text-teal-400!"><strong class="text-teal-400!">15.678</strong></p>
-              <p class="movie-count-label">Visualizações</p>
-            </div>
+        <div class="stat-card hover:bg-teal-900! transition duration-200">
+          <div class="stat-icon">
+            <img src="assets/icons/movie-open-play-outline.svg" alt="">
+          </div>
+          <div class="stat-content">
+            <h4>Filmes Assistidos</h4>
+            <span class="stat-number text-teal-400!">1350</span>
+          </div>
+        </div>
+        <div class="stat-card hover:bg-teal-900! transition duration-200">
+          <div class="stat-icon">
+            <img src="assets/icons/movie-open-edit-outline.svg" alt="">
+          </div>
+          <div class="stat-content">
+            <h4>Marcados como "Assistir Mais Tarde"</h4>
+            <span class="stat-number text-teal-400!">576</span>
           </div>
         </div>
       </div>
-    </div>
 
-    <!-- 2 - Insights em Cards verticais -->
-    <div class="card flex flex-col justify-around gap-3">
-      <div class="stat-card hover:bg-teal-900! transition duration-200">
-        <div class="stat-icon">
-          <img src="assets/icons/movie-open-plus-outline.svg" alt="">
-        </div>
-        <div class="stat-content">
-          <h4>Filmes Cadastrados</h4>
-          <span class="stat-number text-teal-400!">2.500</span>
+      <div class="card card-wide">
+        <h3 class="text-lg font-semibold border-b border-[#334155] pb-2 mb-8">Top 5 Usuários que Mais Assistiram Filmes</h3>
+        <ol class="user-list ranked">
+          <li><strong>🥇 Maria S.</strong> — 134 filmes</li>
+          <li><strong>🥈 João P.</strong> — 121 filmes</li>
+          <li><strong>🥉 Lucas M.</strong> — 118 filmes</li>
+          <li>Ana C. — 110 filmes</li>
+          <li>Pedro L. — 107 filmes</li>
+        </ol>
+      </div>
+    
+      <div class="card">
+        <div class="stat-card hover:bg-slate-900! transition duration-200">
+          <div class="stat-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" width="36" height="36" fill="currentColor">
+              <path d="M572.52 241.4C518.8 135.9 407.8 64 288 64S57.2 135.9 3.48 241.4a48.07 48.07 0 0 0 0 29.2C57.2 376.1 168.2 448 288 448s230.8-71.9 284.52-177.4a48.07 48.07 0 0 0 0-29.2zM288 400c-70.7 0-128-57.3-128-128s57.3-128 128-128 128 57.3 128 128-57.3 128-128 128zm0-208a80 80 0 1 0 80 80 80 80 0 0 0-80-80z"/>
+            </svg>
+          </div>
+          <div class="stat-content">
+            <h4>Total de Usuários</h4>
+            <span class="stat-number text-teal-400!">2500</span>
+          </div>
         </div>
       </div>
-      <div class="stat-card hover:bg-teal-900! transition duration-200">
-        <div class="stat-icon">
-          <img src="assets/icons/movie-open-play-outline.svg" alt="">
-        </div>
-        <div class="stat-content">
-          <h4>Filmes Assistidos</h4>
-          <span class="stat-number text-teal-400!">1350</span>
-        </div>
-      </div>
-      <div class="stat-card hover:bg-teal-900! transition duration-200">
-        <div class="stat-icon">
-          <img src="assets/icons/movie-open-edit-outline.svg" alt="">
-        </div>
-        <div class="stat-content">
-          <h4>Marcados como "Assistir Mais Tarde"</h4>
-          <span class="stat-number text-teal-400!">576</span>
-        </div>
-      </div>
+      
     </div>
-
-    <div class="card card-wide">
-      <h3 class="section-title">Top 5 Usuários que Mais Assistiram Filmes</h3>
-      <ol class="user-list ranked">
-        <li><strong>🥇 Maria S.</strong> — 134 filmes</li>
-        <li><strong>🥈 João P.</strong> — 121 filmes</li>
-        <li><strong>🥉 Lucas M.</strong> — 118 filmes</li>
-        <li>Ana C. — 110 filmes</li>
-        <li>Pedro L. — 107 filmes</li>
-      </ol>
-    </div>
-
-    <div class="card">
-      <div class="stat-card hover:bg-slate-900! transition duration-200">
-        <div class="stat-icon">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" width="36" height="36" fill="currentColor">
-            <path d="M572.52 241.4C518.8 135.9 407.8 64 288 64S57.2 135.9 3.48 241.4a48.07 48.07 0 0 0 0 29.2C57.2 376.1 168.2 448 288 448s230.8-71.9 284.52-177.4a48.07 48.07 0 0 0 0-29.2zM288 400c-70.7 0-128-57.3-128-128s57.3-128 128-128 128 57.3 128 128-57.3 128-128 128zm0-208a80 80 0 1 0 80 80 80 80 0 0 0-80-80z"/>
-          </svg>
-        </div>
-        <div class="stat-content">
-          <h4>Total de Usuários</h4>
-          <span class="stat-number text-teal-400!">2500</span>
-        </div>
-      </div>
-    </div>
-
-  </div>
+  }
 </div>

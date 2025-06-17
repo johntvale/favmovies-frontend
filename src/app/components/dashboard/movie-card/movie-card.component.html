@@ -1,0 +1,42 @@
+<div
+  class="max-w-md bg-slate-800 text-white rounded-2xl shadow-md"
+  [class.p-4]="highlight === true"
+>
+  <h3 *ngIf="cardType !== ''" class="text-lg font-semibold border-b border-[#334155] pb-2 mb-8">
+    Filme mais {{ cardType }} do mês!
+  </h3>
+  <div class="flex flex-col items-center">
+    <div 
+      class="relative w-full mb-2 group rounded-lg overflow-hidden" 
+      [class.h-64]="highlight === true" 
+      [class.h-50]="highlight !== true" 
+      [ngSwitch]="rankType">
+      <span *ngSwitchCase="'gold'" class="absolute mt-2 ml-2 z-20 text-xl text-white rank bg-teal-100/20 rounded">🥇</span>
+      <span *ngSwitchCase="'silver'" class="absolute mt-2 ml-2 z-20 text-xl text-white rank bg-teal-100/20 rounded">🥈</span>
+      <span *ngSwitchCase="'bronze'" class="absolute mt-2 ml-2 z-20 text-xl text-white rank bg-teal-100/20 rounded">🥉</span>
+      <div
+        class="absolute inset-0 z-10 pointer-events-none transition-opacity duration-500 ease-in-out opacity-100 group-hover:opacity-0 bg-[linear-gradient(to_bottom,rgba(0,0,0,0.4),rgba(0,0,0,0)_30%),linear-gradient(to_left,rgba(0,0,0,0.3),rgba(0,0,0,0)_30%),linear-gradient(to_right,rgba(0,0,0,0.3),rgba(0,0,0,0)_30%),linear-gradient(to_top,rgba(0,0,0,0.4),rgba(0,0,0,0)_100%)]"
+      ></div>
+      <img
+        [src]="movie.imageUrl"
+        [alt]="movie.title"
+        class="h-full w-50 object-cover object-top z-0"
+      />
+    </div>
+    <div class="border-b border-[#334155] w-full pb-2">
+      <p class="text-center text-base font-medium" [class.min-h-15]="highlight === false">
+        {{ movie.title }}
+      </p>
+    </div>
+    <div class="flex items-center justify-center mt-2 gap-3">
+      <img *ngIf="labelType === 'Marcações'" src="assets/icons/add-favorite.svg" class="my-auto" alt="" />
+      <img *ngIf="labelType !== 'Marcações'" src="assets/icons/eye.svg" class="my-auto" alt="" />
+      <div>
+        <p class="text-teal-400 font-bold text-sm">
+          {{ movie.favoriteCount }}
+        </p>
+        <p class="text-xs text-gray-300"> {{ labelType }}</p>
+      </div>
+    </div>
+  </div>
+</div>

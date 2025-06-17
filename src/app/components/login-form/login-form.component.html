@@ -16,6 +16,7 @@
           'ring-1 ring-green-500 focus:ring-1 focus:ring-green-500': loginForm.controls['email'].valid && loginForm.controls['email'].touched
         }"
         required
+        autocomplete="email"
       />
       @if (loginForm.controls['email'].invalid && loginForm.controls['email'].touched) {
         <div class="absolute top-full mt-1 z-10 left-0 bg-red-500 text-white text-xs rounded px-3 py-1 shadow">

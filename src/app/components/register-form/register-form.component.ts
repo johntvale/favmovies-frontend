@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
-import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { UserService } from '../../services/user.service';
-import { ToastrService } from 'ngx-toastr';
-import { RegexPatterns } from '../../shared/constants/regex.constants';
 import { NgClass } from '@angular/common';
+import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
+
+import { UserService } from '../../services/user.service';
+import { RegexPatterns } from '../../shared/constants/regex.constants';
 
 @Component({
   selector: 'app-register-form',
