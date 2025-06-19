@@ -4,16 +4,16 @@ import { iUser } from "./user.interface"
 export interface iInsights {
   favorites: {
     top3Favorites: iMovie[],
-    favoriteMovieOfTheMonth: iMovie,
+    mostFavoriteMovieOfTheMonth: iMovie[],
     miniCards: {
       totalMovies: number,
-      totalFavorites: number,
+      totalFavoriteMarks: number,
       percentageOfFavorited: number
     }
   },
   watched: {
     top3MostWatched: iMovie[],
-    mostWatchedOfTheMonth: iMovie,
+    mostWatchedOfTheMonth: iMovie[],
     miniCards: {
       totalViews: number,
       percentageOfWatchedMovies: number,
@@ -22,10 +22,10 @@ export interface iInsights {
   },
   ratings: {
     top3Ratings: iMovie[],
-    userWithHighestEngagement: iUser | null,
+    mostRatedMovieOfTheMonth: iMovie[] | null,
     miniCards: {
       totalRatings: number,
-      mediaGeral: number,
+      overallRatingAverage: number,
       userWhoRatedTheMostMovies: iUser | null
     }
   }

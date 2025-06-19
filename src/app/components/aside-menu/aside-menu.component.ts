@@ -17,10 +17,4 @@ export class AsideMenuComponent {
   activeSection: Signal<string> = inject(AdminComponent).activeSection;
 
   onSectionSelected = inject(AdminComponent).onSectionSelected;
-  // @Input() active: string = '';
-  // @Output() selectedSection = new EventEmitter<string>();
-
-  // select(section: string) {
-  //   this.selectedSection.emit(section);
-  // }
 }

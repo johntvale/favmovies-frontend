@@ -1,4 +1,4 @@
-import { Component, Signal, signal } from '@angular/core';
+import { Component, signal } from '@angular/core';
 
 import { iMovie } from '../../interfaces/movie.interface';
 import { MovieService } from './../../services/movie.service';
@@ -6,10 +6,11 @@ import { insightsService } from '../../services/insights.service';
 import { iInsights } from '../../interfaces/insights.interface';
 import { LoadingComponent } from "../../loading/loading.component";
 import { MovieCardComponent } from "./movie-card/movie-card.component";
+import { MiniCardComponent } from "./mini-card/mini-card.component";
 
 @Component({
   selector: 'app-dashboard',
-  imports: [LoadingComponent, MovieCardComponent],
+  imports: [LoadingComponent, MovieCardComponent, MiniCardComponent],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.css',
 })
@@ -17,7 +18,7 @@ export class DashboardComponent {
   movieList: iMovie[] = [];
 
   isLoadingInsights: boolean = true;
-  favorites = signal<iInsights['favorites'] | any >({}); //ok
+  favorites = signal<iInsights['favorites'] | any >({});
   watched = signal<iInsights['watched'] | any >({});
   ratings = signal<iInsights['ratings'] | any >({});
 
@@ -34,11 +35,11 @@ export class DashboardComponent {
       next: (result) => {
         if (result) {
           this.favorites.set(result.insights.favorites);
-          // this.watched.set(result.insights.watched);
-          // this.ratings.set(result.insights.ratings);
+          this.watched.set(result.insights.watched);
+          this.ratings.set(result.insights.ratings);
           console.log(this.favorites());
-          // console.log(this.watched());
-          // console.log(this.ratings());
+          console.log(this.watched());
+          console.log(this.ratings());
         }
       },
       complete: () => {

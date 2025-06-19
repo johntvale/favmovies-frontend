@@ -1,42 +1,82 @@
 <div
-  class="max-w-md bg-slate-800 text-white rounded-2xl shadow-md"
+  class="max-w-md bg-slate-800 text-white rounded-2xl shadow-md h-full"
   [class.p-4]="highlight === true"
 >
-  <h3 *ngIf="cardType !== ''" class="text-lg font-semibold border-b border-[#334155] pb-2 mb-8">
-    Filme mais {{ cardType }} do mês!
+  <h3 *ngIf="highlight === true && cardType !=='Avaliado'" class="text-lg font-semibold border-b border-[#334155] pb-2 mb-8">
+    Filme Mais {{ cardType }} do Mês!
+  </h3>
+  <h3 *ngIf="highlight === true && cardType ==='Avaliado'" class="text-lg font-semibold border-b border-[#334155] pb-2 mb-8">
+    Filme Com Melhor Avaliação do Mês!
   </h3>
   <div class="flex flex-col items-center">
     <div 
       class="relative w-full mb-2 group rounded-lg overflow-hidden" 
-      [class.h-64]="highlight === true" 
+      [class.h-70]="highlight === true" 
       [class.h-50]="highlight !== true" 
       [ngSwitch]="rankType">
-      <span *ngSwitchCase="'gold'" class="absolute mt-2 ml-2 z-20 text-xl text-white rank bg-teal-100/20 rounded">🥇</span>
-      <span *ngSwitchCase="'silver'" class="absolute mt-2 ml-2 z-20 text-xl text-white rank bg-teal-100/20 rounded">🥈</span>
-      <span *ngSwitchCase="'bronze'" class="absolute mt-2 ml-2 z-20 text-xl text-white rank bg-teal-100/20 rounded">🥉</span>
+      <span *ngSwitchCase="'gold'" class="absolute mt-2 ml-2 z-20 text-xl text-white bg-teal-100/20 rounded">🥇</span>
+      <span *ngSwitchCase="'silver'" class="absolute mt-2 ml-2 z-20 text-xl text-white bg-teal-100/20 rounded">🥈</span>
+      <span *ngSwitchCase="'bronze'" class="absolute mt-2 ml-2 z-20 text-xl text-white bg-teal-100/20 rounded">🥉</span>
       <div
         class="absolute inset-0 z-10 pointer-events-none transition-opacity duration-500 ease-in-out opacity-100 group-hover:opacity-0 bg-[linear-gradient(to_bottom,rgba(0,0,0,0.4),rgba(0,0,0,0)_30%),linear-gradient(to_left,rgba(0,0,0,0.3),rgba(0,0,0,0)_30%),linear-gradient(to_right,rgba(0,0,0,0.3),rgba(0,0,0,0)_30%),linear-gradient(to_top,rgba(0,0,0,0.4),rgba(0,0,0,0)_100%)]"
       ></div>
-      <img
-        [src]="movie.imageUrl"
-        [alt]="movie.title"
-        class="h-full w-50 object-cover object-top z-0"
-      />
+      <div
+        class="h-full w-33"
+        [class.w-50]="highlight === true"
+      >
+        <img
+          [src]="movie.imageUrl"
+          [alt]="movie.title"
+          class="h-full object-cover object-center z-0 hover:scale-102 hover:transition-transform duration-500 ease-in-out"
+          [class.object-contain]="highlight === true"
+          [class.w-full]="highlight === true"
+        />
+      </div>
     </div>
-    <div class="border-b border-[#334155] w-full pb-2">
-      <p class="text-center text-base font-medium" [class.min-h-15]="highlight === false">
+    <div
+      class="border-b border-[#334155] w-full pb-2"
+      [class.min-h-20]="highlight === false"
+      >
+      <p class="text-center text-base font-medium"
+        [class.min-h-13]="highlight === false"
+      >
         {{ movie.title }}
       </p>
     </div>
-    <div class="flex items-center justify-center mt-2 gap-3">
-      <img *ngIf="labelType === 'Marcações'" src="assets/icons/add-favorite.svg" class="my-auto" alt="" />
-      <img *ngIf="labelType !== 'Marcações'" src="assets/icons/eye.svg" class="my-auto" alt="" />
-      <div>
-        <p class="text-teal-400 font-bold text-sm">
-          {{ movie.favoriteCount }}
-        </p>
-        <p class="text-xs text-gray-300"> {{ labelType }}</p>
-      </div>
+    <div class="flex items-center justify-center my-2 gap-3" [ngSwitch]="cardType">
+      <ng-container *ngSwitchCase="'Favoritado'">
+        <div class="my-auto h-[22px] w-[22px]">
+          <img src="assets/icons/heart-check.svg" alt="" />
+        </div>
+        <div class="flex flex-col items-center">
+          <p class="text-teal-400 font-bold text-sm">
+            {{ movie.favoriteCount }}
+          </p>
+          <p class="text-xs text-gray-300"> Marcações </p>
+        </div>
+      </ng-container>
+      <ng-container *ngSwitchCase="'Assistido'">
+        <img src="assets/icons/eye.svg" class="my-auto" alt="" />
+        <div class="flex flex-col items-center">
+          <p class="text-teal-400 font-bold text-sm">
+            {{ movie.viewCount }}
+          </p>
+          <p class="text-xs text-gray-300"> Visualizações </p>
+        </div>
+      </ng-container>
+      <ng-container *ngSwitchCase="'Avaliado'">
+        <div class="my-auto h-[22px] w-[22px]">
+          <img src="assets/icons/star-check-outline.png" alt="" />
+        </div>
+        <div class="flex flex-col items-center justify-center">
+          <p class="text-teal-400 font-bold text-sm">
+            {{ movie.averageRating.toFixed(1) }}
+          </p>
+          <p
+            class="text-xs text-gray-300 text-center"
+            > Avaliação </p>
+        </div>
+      </ng-container>
     </div>
   </div>
 </div>

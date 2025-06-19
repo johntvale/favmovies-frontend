@@ -1,5 +1,4 @@
-import { Component, inject, Input } from '@angular/core';
-import { DashboardComponent } from '../dashboard.component';
+import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { iMovie } from '../../../interfaces/movie.interface';
 
@@ -12,11 +11,7 @@ import { iMovie } from '../../../interfaces/movie.interface';
 
 export class MovieCardComponent {
   @Input() cardType: string = '';
-  @Input() labelType: string = '';
   @Input() rankType: string = '';
   @Input() highlight: boolean = false;
   @Input() movie: iMovie | any = {};
-
-  constructor() {
-  }
 }

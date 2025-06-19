@@ -3,7 +3,9 @@
   <div class="container-page">
     <app-aside-menu></app-aside-menu>
     <main class="min-h-100 text-slate-100 w-full">
-      <div class="min-h-[400px] rounded-lg bg-slate-900 p-4 mx-4 mr-20" [ngSwitch]="activeSection()">
+      <div
+        class="min-h-[400px] rounded-lg bg-slate-900 p-4 mx-4 mr-20"
+        [ngSwitch]="activeSection()">
         <div *ngSwitchCase="'dashboard'">
           <app-dashboard></app-dashboard>
         </div>
@@ -15,6 +17,11 @@
         </div>
         <div *ngSwitchCase="'settings'">
           <p>Este é o conteúdo da página de Settings.</p>
+        </div>
+        <div *ngSwitchDefault="">
+          <div class="flex items-center justify-center h-[400px]">
+            <span class="font-semibold text-8xl text-slate-600/10 select-none">FAVMOVIES</span>
+          </div>
         </div>
       </div>
     </main>

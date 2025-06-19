@@ -1,0 +1,59 @@
+<div class="flex items-center gap-4 p-4 bg-slate-800 rounded-lg shadow-md hover:bg-teal-900 transition duration-200">
+  <div class="text-2xl mr-4" [ngSwitch]="iconType">
+
+    <!-- ÍCONES SEÇÃO FAVORITOS -->
+    <div *ngSwitchCase="'total-movies'" class="h-10 w-10">
+      <img src="assets/icons/movie-edit-outline.svg" class="h-full w-full" alt="">
+    </div>
+    <div *ngSwitchCase="'marked-as-favorite'" class="h-10 w-10">
+      <img src="assets/icons/heart-check.svg" class="h-full w-full" alt="">
+    </div>
+    <div *ngSwitchCase="'marked-as-favorite-percentage'" class="h-10 w-10">
+      <img src="assets/icons/heart-percentage.svg" class="h-full w-full" alt="">
+    </div>
+
+    <!-- ÍCONES SEÇÃO ASSISTIDOS -->
+    <div *ngSwitchCase="'total-views'" class="h-10 w-10">
+      <img src="assets/icons/eye.svg" class="h-full w-full" alt="">
+    </div>
+    <div *ngSwitchCase="'user-with-most-views'" class="h-10 w-10">
+      <img src="assets/icons/account-eye-outline.svg" class="h-full w-full" alt="">
+    </div>
+    <div *ngSwitchCase="'watched-movies-percentage'" class="h-10 w-10">
+      <img src="assets/icons/eye-percentage.svg" class="h-full w-full" alt="">
+    </div>
+
+    <!-- ÍCONES SEÇÃO AVALIAÇÕES -->
+    <div *ngSwitchCase="'total-ratings'" class="h-10 w-10">
+      <img src="assets/icons/star-check-outline.png" class="h-full w-full" alt="">
+    </div>
+    <div *ngSwitchCase="'ratings-three-stars'" class="h-10 w-10">
+      <img src="assets/icons/three-stars.svg" class="h-full w-full" alt="">
+    </div>
+    <div *ngSwitchCase="'user-with-most-ratings'" class="h-10 w-10">
+      <img src="assets/icons/hand-stars-linear.svg" class="h-full w-full" alt="">
+    </div>
+
+  </div>
+  <div class="flex flex-col justify-center">
+    <h4>{{ title}}</h4>
+
+    <div *ngIf="userAndViews" class="flex flex-col" >
+      <span class="text-sm font-light text-teal-300">{{ userNameViews }}</span>
+      <span class="text-lg font-bold text-teal-400">{{ totalViews + ' Views' }}</span>
+    </div>
+
+    <div *ngIf="userAndRatings" class="flex flex-col" >
+      <span class="text-sm font-light text-teal-300">{{ userNameRatings }}</span>
+      <span class="text-sm font-bold text-teal-400">{{ totalRatings + ' Avaliações' }}</span>
+    </div>
+
+    <div *ngIf="iconType.includes('percentage')" class="flex flex-col" >
+      <span class="text-2xl font-bold text-teal-400">{{ value.toString().split('.')[0].concat(' %') }}</span>
+    </div>
+
+    <div *ngIf="!iconType.includes('percentage')" class="flex flex-col" >
+      <span class="text-2xl font-bold text-teal-400">{{ value }}</span>
+    </div>
+  </div>
+</div>
