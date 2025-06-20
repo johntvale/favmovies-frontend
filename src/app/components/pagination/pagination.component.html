@@ -1,0 +1,31 @@
+<div class="flex justify-center mt-4 gap-2 items-center">
+  <button
+    class="secondary-button"
+    (click)="handlePageChange(1)"
+    [disabled]="currentPage === 1"
+  >
+    Primeira
+  </button>
+  <button
+    class="secondary-button"
+    (click)="handlePageChange(currentPage - 1)"
+    [disabled]="currentPage === 1"
+  >
+    Anterior
+  </button>
+  <span class="mx-2 text-xs">Página <span class="font-bold">{{ currentPage }}</span> de <span class="font-bold">{{ totalPages }}</span></span>
+  <button
+    class="secondary-button"
+    (click)="handlePageChange(currentPage + 1)"
+    [disabled]="currentPage === totalPages"
+  >
+    Próxima
+  </button>
+  <button
+    class="secondary-button"
+    (click)="handlePageChange(totalPages)"
+    [disabled]="currentPage === totalPages"
+  >
+    Última
+  </button>
+</div>

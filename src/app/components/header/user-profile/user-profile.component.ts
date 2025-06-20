@@ -3,8 +3,8 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { NgClass } from '@angular/common';
 import { ToastrService } from 'ngx-toastr';
 
-import { iconsList } from '../../shared/constants/profile-icons.constants';
-import { AuthService } from '../../services/auth.service';
+import { iconsList } from '../../../shared/constants/profile-icons.constants';
+import { AuthService } from '../../../services/auth.service';
 
 @Component({
   selector: 'app-user-profile',

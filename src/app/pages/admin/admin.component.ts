@@ -21,7 +21,7 @@ import { MoviesManagementComponent } from "../../components/movies-management/mo
   styleUrl: './admin.component.css'
 })
 export class AdminComponent {
-  activeSection = signal<string>('');
+  activeSection = signal<string>('movies');
 
   onSectionSelected(section: string) {
     this.activeSection.set(section);

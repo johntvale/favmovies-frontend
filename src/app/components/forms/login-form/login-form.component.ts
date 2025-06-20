@@ -4,9 +4,9 @@ import { Router } from '@angular/router';
 import { NgClass } from '@angular/common';
 import { ToastrService } from 'ngx-toastr';
 
-import { RegexPatterns } from '../../shared/constants/regex.constants';
-import { AuthService } from '../../services/auth.service';
-import { iResponseAuthWithUser } from '../../interfaces/auth.intercace';
+import { RegexPatterns } from '../../../shared/constants/regex.constants';
+import { AuthService } from '../../../services/auth.service';
+import { iResponseAuthWithUser } from '../../../interfaces/auth.intercace';
 
 @Component({
   selector: 'app-login-form',

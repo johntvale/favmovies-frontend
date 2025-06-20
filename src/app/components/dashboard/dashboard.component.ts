@@ -4,7 +4,7 @@ import { iMovie } from '../../interfaces/movie.interface';
 import { MovieService } from './../../services/movie.service';
 import { insightsService } from '../../services/insights.service';
 import { iInsights } from '../../interfaces/insights.interface';
-import { LoadingComponent } from "../../loading/loading.component";
+import { LoadingComponent } from "../loading/loading.component";
 import { MovieCardComponent } from "./movie-card/movie-card.component";
 import { MiniCardComponent } from "./mini-card/mini-card.component";
 
@@ -25,7 +25,6 @@ export class DashboardComponent {
   constructor(private movieService: MovieService, private insightsService: insightsService) {}
   
   ngOnInit() {
-    // this.getMovieList();
     this.getInsightsService();
   }
   
@@ -37,9 +36,6 @@ export class DashboardComponent {
           this.favorites.set(result.insights.favorites);
           this.watched.set(result.insights.watched);
           this.ratings.set(result.insights.ratings);
-          console.log(this.favorites());
-          console.log(this.watched());
-          console.log(this.ratings());
         }
       },
       complete: () => {
@@ -50,17 +46,4 @@ export class DashboardComponent {
       },
     });
   };
-
-  // getMovieList() {
-    //   this.movieService.getMovieList().subscribe({
-      //     next: (result) => {
-        //       if (result.movies) {
-  //         this.movieList = result.movies;
-  //       }
-  //       console.log(this.movieList);
-  //     },
-  //     error: () => {},
-  //   });
-  // }
-
 }

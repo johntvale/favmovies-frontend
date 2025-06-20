@@ -5,7 +5,7 @@ import { MoviesComponent } from './pages/movies/movies.component';
 import { RedirectGuard } from './guards/redirect.guard';
 import { AuthGuard } from './guards/auth.guard';
 import { RoleGuard } from './guards/role.guard';
-import { LoadingComponent } from './loading/loading.component';
+import { LoadingComponent } from './components/loading/loading.component';
 import { NotFoundComponent } from './pages/not-found/not-found.component';
 
 export const routes: Routes = [

@@ -5,8 +5,8 @@ import { bootstrapCollectionPlay, bootstrapPeople, bootstrapColumnsGap, bootstra
 import { ToastrService } from 'ngx-toastr';
 
 import { AuthService } from '../../services/auth.service';
-import { UserProfileComponent } from "../user-profile/user-profile.component"
-import { LoginFormComponent } from "../login-form/login-form.component";
+import { UserProfileComponent } from "./user-profile/user-profile.component"
+import { LoginFormComponent } from "../forms/login-form/login-form.component";
 
 @Component({
   selector: 'app-header',

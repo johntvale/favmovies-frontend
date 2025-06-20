@@ -1,35 +1,37 @@
 <section class="container-section">
-  <div class="container">
+  <div class="pb-2 ml-4">
+    <span class="font-semibold text-sm text-slate-500">MOVIES</span>
+  </div>
 
-    <!-- Barra de Pesquisa e Botão para Adicionar Filme -->
+  <div class="bg-slate-800 rounded-2xl p-4">
+    
+    <!-- FILTRO DE BUSCA -->
     <div class="flex justify-between items-center mb-4">
-      <!-- Formulário de busca -->
-      <form (ngSubmit)="applySearch()" class="flex gap-2">
+      <form (ngSubmit)="filterMovieList()" class="flex gap-2">
         <input
           type="text"
           placeholder="Pesquisar filme..."
-          [(ngModel)]="searchQuery"
+          [(ngModel)]="searchFilter"
           name="search"
           class="border border-slate-300 text-slate-200! font-bold placeholder:font-normal placeholder:text-slate-400 outline-none focus:outline-none px-3 py-2 rounded"
         >
         <button type="submit" class="secondary-button">Pesquisar</button>
       </form>
-    
-      <button class="primary-button" (click)="openEditModal(false)">Adicionar Filme</button>
+      <button class="primary-button" (click)="openModal('REGISTER')">Adicionar Filme</button>
     </div>
     
-    <!-- Exibição da última busca -->
-    <div *ngIf="lastSearchQuery" class="my-3 text-sm text-slate-400">
-      Última busca: <strong>{{ lastSearchQuery }}</strong>
+    <!-- ÚLTIMA BUSCA REALIZADA -->
+    <div *ngIf="lastMovieSearch" class="my-3 text-sm text-slate-400">
+      Última busca: <strong>{{ lastMovieSearch }}</strong>
       <a (click)="clearSearch()" class="text-blue-500 hover:underline ml-2 cursor-pointer">Limpar busca</a>
-    </div>
-    
+    </div>    
 
-    <!-- Tabela de Filmes -->
+    <!-- TABELA DE FILMES -->
     <div class="card">
       <table class="table-auto w-full">
         <thead>
           <tr>
+            <th>#</th>
             <th>Imagem</th>
             <th>Título</th>
             <th>Categorias</th>
@@ -37,133 +39,75 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let movie of paginatedMovies" class="hover:bg-teal-900 transition duration-200">
-            <td (click)="openDetailsModal(movie)">
+          <tr *ngFor="let movie of filteredAndPaginatedMovieList; let i = index" class="hover:bg-teal-900 transition duration-200">
+            <td (click)="openModal('DETAILS', movie)">
+              <div class="flex items-center justify-center gap-2 cursor-pointer">
+                <span>{{ i + 1 }}</span>
+              </div>
+            </td>
+            <td (click)="openModal('DETAILS', movie)">
               <div class="flex items-center justify-center gap-2 cursor-pointer">
                 <img [src]="movie.imageUrl" alt="Poster" class="movie-poster" width="80">
               </div>
             </td>
-            <td (click)="openDetailsModal(movie)">
+            <td (click)="openModal('DETAILS', movie)">
               <div class="cell-flex table-width-title cursor-pointer">
                 <span class="ellipsis-text"> {{ movie.title }} </span>
               </div>
             </td>
-            <td (click)="openDetailsModal(movie)">
+            <td (click)="openModal('DETAILS', movie)">
               <div class="cell-flex table-width-category cursor-pointer">
                 <span class="ellipsis-text"> {{ movie.category.join(', ') }} </span>
               </div>
             </td>
             <td class="">
               <div class="flex gap-2 items-center justify-center gap-2">
-                <button class="secondary-button" (click)="openEditModal(true, movie)">Editar</button>
-                <button class="danger-button" (click)="openDeleteModal(movie)">Excluir</button>
+                <button
+                  class="secondary-button"
+                  (click)="openModal('EDIT', movie)"
+                >
+                  Editar
+                </button>
+                <button
+                  class="danger-button"
+                  (click)="openModal('DELETE', movie)"
+                >
+                  Excluir
+                </button>
               </div>
             </td>
           </tr>
         </tbody>
       </table>
 
-      <!-- Paginação -->
-      <div class="pagination flex justify-center mt-4 gap-2 items-center">
-        <button class="secondary-button" (click)="changePage(1)" [disabled]="page === 1">Primeira</button>
-        <button class="secondary-button" (click)="changePage(page - 1)" [disabled]="page === 1">Anterior</button>
-        <span class="mx-2 text-xs">Página <span class="font-bold">{{ page }}</span> de <span class="font-bold">{{ totalPages }}</span></span>
-        <button class="secondary-button" (click)="changePage(page + 1)" [disabled]="page === totalPages">Próxima</button>
-        <button class="secondary-button" (click)="changePage(totalPages)" [disabled]="page === totalPages">Última</button>
-      </div>
-    </div>
-
-    <!-- Modal de Detalhes -->
-    <div *ngIf="isDetailsModalOpen" class="modal fixed inset-0 flex items-center justify-center bg-slate-950/80">
-        <div class="modal-content text-white bg-slate-900 p-6 rounded-lg shadow-lg w-full max-w-md">
-          <div class="flex justify-between border-theme mb-6 ">
-            <h3 class="text-xl font-semibold ">Detalhes do Filme</h3>
-            <span class="font-bold rounded-4xl border border-1 border-slate-600/70 px-3 py-1 cursor-pointer translate-x-9 -translate-y-9" (click)="closeDetailsModal()">X</span>
-          </div>
-
-          <div class="space-y-4">
-            <div>
-              <span class="font-medium">Título:</span>
-              <p>{{ selectedMovie?.title }}</p>
-            </div>
-
-            <div>
-              <span class="font-medium">Categorias:</span>
-              <p>{{ selectedMovie?.category.join(', ') }}</p>
-            </div>
-
-            <div class="text-center">
-              <span class="font-medium block mb-2">Imagem:</span>
-              <img [src]="selectedMovie?.imageUrl"
-                alt="Poster"
-                class="rounded w-32 h-auto mx-auto shadow-md border border-slate-600" />
-            </div>
-          </div>
-
-          <div class="flex justify-end mt-6">
-            <button class="secondary-button" (click)="closeDetailsModal()">Fechar</button>
-          </div>
-        </div>
-    </div>
-
-    <!-- Modal para Adicionar/Editar Filme -->
-    <div *ngIf="isModalOpen" class="modal fixed inset-0 flex items-center justify-center bg-slate-950/80">
-      <div class="modal-content text-white bg-slate-900 p-6 rounded-lg shadow-lg w-full max-w-md">
-        <div class="flex justify-between border-theme mb-6">
-          <h3 class="text-xl font-semibold">
-            {{ isEditing ? 'Editar Filme' : 'Adicionar Novo Filme' }}
-          </h3>
-          <span class="font-bold rounded-4xl border border-1 border-slate-600/70 px-3 py-1 cursor-pointer translate-x-9 -translate-y-9" (click)="closeEditModal()">X</span>
-        </div>
-
-        <form (ngSubmit)="isEditing ? updateMovie() : addMovie()">
-          <div class="space-y-4">
-            <div>
-              <label for="title" class="block font-medium mb-1">Título</label>
-              <input id="title" [(ngModel)]="currentMovie.title" name="title" class="input mb-3 w-full" required>
-            </div>
-
-            <div>
-              <label for="category" class="block font-medium mb-1">Categorias (separadas por vírgula)</label>
-              <input id="category" [(ngModel)]="currentMovie.category" name="category" class="input mb-3 w-full" required placeholder="Ex: Ação, Drama, Comédia">
-            </div>
-
-            <div>
-              <label for="imageUrl" class="block font-medium mb-1">Imagem (URL)</label>
-              <input id="imageUrl" [(ngModel)]="currentMovie.imageUrl" name="imageUrl" class="input mb-3 w-full" required placeholder="https://exemplo.com/imagem.jpg">
-            </div>
-          </div>
-
-          <div class="flex justify-end gap-2 mt-4">
-            <button type="submit" class="primary-button">
-              {{ isEditing ? 'Atualizar' : 'Adicionar' }}
-            </button>
-            <button type="button" class="secondary-button" (click)="closeEditModal()">
-              Cancelar
-            </button>
-          </div>
-        </form>
-      </div>
-    </div>
-
-    <!-- Modal de Confirmação de Exclusão -->
-    <div *ngIf="isDeleteModalOpen" class="modal fixed inset-0 flex items-center justify-center bg-slate-950/80">
-      <div class="modal-content text-white bg-slate-900 p-6 rounded-lg shadow-lg w-full max-w-md">
-        <div class="flex justify-between border-theme mb-6">
-          <h3 class="text-xl font-semibold">⚠️ Confirmar Exclusão</h3>
-          <span class="font-bold rounded-4xl border border-1 border-slate-600/70 px-3 py-1 cursor-pointer translate-x-9 -translate-y-9" (click)="closeDeleteModal()">X</span>
-        </div>
-
-        <div class="space-y-4">
-          <p>Você tem certeza de que deseja excluir o filme "{{ selectedMovie?.title }}"?</p>
-        </div>
-
-        <div class="flex justify-end gap-4 mt-6">
-          <button class="secondary-button" (click)="closeDeleteModal()">Cancelar</button>
-          <button class="danger-button" (click)="deleteMovie()">Excluir</button>
-        </div>
-      </div>
-    </div>
-
+      <!-- PAGINAÇÃO -->
+      <app-pagination
+        [currentPage]="currentPage"
+        [totalPages]="totalPages"
+        (pageChange)="handlePageChange($event)"
+      ></app-pagination>
+    </div>    
   </div>
+
+  <app-details-modal
+    *ngIf="isDetailsModalOpen"
+    [selectedMovie]="selectedMovie"
+    [closeModal]="closeModal.bind(this)"
+  ></app-details-modal>
+
+  <app-form-modal
+    *ngIf="isRegisterModalOpen || isEditModalOpen"
+    [selectedMovie]="selectedMovie"
+    [closeModal]="closeModal.bind(this)"
+    [isEditModalOpen]="isEditModalOpen"
+    [isRegisterModalOpen]="isRegisterModalOpen"
+    class="modal fixed inset-0 flex items-center justify-center bg-slate-950/80"
+  ></app-form-modal>
+
+  <app-delete-modal
+    *ngIf="isDeleteModalOpen"
+    [closeModal]="closeModal.bind(this)"
+    [selectedMovie]="selectedMovie"
+    class="modal fixed inset-0 flex items-center justify-center bg-slate-950/80"
+  ></app-delete-modal>
 </section>

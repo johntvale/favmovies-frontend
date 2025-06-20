@@ -1,0 +1,17 @@
+<div *ngIf="isDeleteModalOpen" class="modal fixed inset-0 flex items-center justify-center bg-slate-950/80">
+  <div class="modal-content text-white bg-slate-900 p-6 rounded-lg shadow-lg w-full max-w-md">
+    <div class="flex justify-between border-theme mb-6">
+      <h3 class="text-xl font-semibold">⚠️ Confirmar Exclusão</h3>
+      <span class="font-bold rounded-4xl border border-1 border-slate-600/70 px-3 py-1 cursor-pointer translate-x-9 -translate-y-9" (click)="closeDeleteModal()">X</span>
+    </div>
+
+    <div class="space-y-4">
+      <p>Você tem certeza de que deseja excluir o filme "{{ selectedMovie?.title }}"?</p>
+    </div>
+
+    <div class="flex justify-end gap-4 mt-6">
+      <button class="secondary-button" (click)="closeDeleteModal()">Cancelar</button>
+      <button class="danger-button" (click)="deleteMovie()">Excluir</button>
+    </div>
+  </div>
+</div>

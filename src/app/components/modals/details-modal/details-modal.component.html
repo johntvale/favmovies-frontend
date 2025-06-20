@@ -1,0 +1,118 @@
+<div class="fixed inset-0 flex items-center justify-center bg-slate-950/80 shadow-lg ">
+  <div class="text-white bg-slate-900 p-6 rounded-lg shadow-lg w-full max-w-md min-w-[900px] flex flex-col items-center h-[540px] border border-[#334155]">
+    <h3 class="text-xl font-semibold pb-2 mb-4 border-theme mb-6 w-full">Detalhes do Filme {{ selectedMovie?.title }}</h3>
+
+    <div class="w-[900px] flex flex-row justify-evenly mb-6 gap-10 h-[400px] overflow-y-auto overflow-x-hidden pl-8">
+      <div class="text-center">
+        <span class="font-medium block mb-2">Pôster de filme:</span>
+        <div class="w-[200px]">
+          <img [src]="selectedMovie?.imageUrl"
+            [alt]="selectedMovie?.title"
+            [title]="'Pôster do Filme ' + selectedMovie?.title"
+            class="rounded object-contain object-center border border-[#334155]" />
+        </div>
+      </div>
+      
+      <div class="overflow-x-auto overflow-x-hidden rounded-lg p-4 bg-slate-500/10">
+        <div class="font-medium mb-2">
+          <span>Título:</span>
+          <input
+            type="text"
+            [value]="selectedMovie?.title"
+            class="border border-slate-300 text-slate-300! px-3 py-2 rounded w-full select-none mt-1" disabled />
+        </div>
+        <div class="font-medium text-sm mb-2 w-130">
+          <span>Descrição:</span>
+          <textarea
+            [value]="selectedMovie?.description"
+            rows="4"
+            class="border border-slate-700 text-slate-300! bg-slate-800 px-3 py-2 rounded w-full mt-1 shadow-md select-none resize-none overflow-y-auto"
+            disabled
+          ></textarea>
+        </div>
+        <div class="font-medium mb-2">
+          <span>Categorias:</span>
+          <input
+          type="text"
+          [value]="selectedMovie?.category?.join(', ')"
+          class="border border-slate-300 text-slate-300! px-3 py-2 rounded w-full select-none mt-1" disabled />
+        </div>
+        <div class="font-medium mb-2">
+          <span>Data de Lançamento:</span>
+          <input
+            type="text"
+            [value]="selectedMovie?.releaseDate"
+            class="border border-slate-300 text-slate-300! px-3 py-2 rounded w-full select-none mt-1" disabled />
+        </div>
+        <div class="font-medium mb-2">
+          <span>Diretor:</span>
+          <input
+            type="text"
+            [value]="selectedMovie?.director"
+            class="border border-slate-300 text-slate-300! px-3 py-2 rounded w-full select-none mt-1" disabled />
+        </div>
+        <div class="font-medium mb-2">
+          <span>Trailer:</span>
+          <input
+            type="text"
+            [value]="selectedMovie?.trailerUrl"
+            class="border border-slate-300 text-slate-300! px-3 py-2 rounded w-full select-none mt-1" disabled />
+        </div>
+        <div class="font-medium mb-2">
+          <span>Imagem:</span>
+          <input
+            type="text"
+            [value]="selectedMovie?.imageUrl"
+            class="border border-slate-300 text-slate-300! px-3 py-2 rounded w-full select-none mt-1" disabled />
+        </div>
+        <div class="font-medium mb-2">
+          <span>Elenco:</span>
+          <input
+            type="text"
+            [value]="selectedMovie?.cast?.join(', ')"
+            class="border border-slate-300 text-slate-300! px-3 py-2 rounded w-full select-none mt-1" disabled />
+        </div>
+      </div>
+    </div>
+
+    <div class="flex justify-end mt-6">
+      <button class="secondary-button" (click)="closeDetailsModal()">Fechar</button>
+    </div>
+  </div>
+</div>
+
+<!-- movieModal = new FormGroup({
+  title: new FormControl('', [
+    Validators.required,
+    Validators.minLength(2),
+    Validators.maxLength(100)
+  ]),
+  description: new FormControl('', [
+    Validators.required,
+    Validators.minLength(2),
+    Validators.maxLength(500)
+  ]),
+  category: new FormControl<string[]>([], [
+    Validators.required,
+    Validators.minLength(1)
+  ]),
+  releaseDate: new FormControl(new Date(), [
+    Validators.required
+  ]),
+  director: new FormControl('', [
+    Validators.minLength(2),
+    Validators.maxLength(100)
+  ]),
+  trailerUrl: new FormControl('', [
+    Validators.required,
+    Validators.pattern('https?://.+')
+  ]),
+  imageUrl: new FormControl('', [
+    Validators.required,
+    Validators.pattern('https?://.+')
+  ]),
+  cast: new FormControl<string[]>([], [
+    Validators.required,
+    Validators.minLength(1)
+  ])
+}); -->

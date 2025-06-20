@@ -1,0 +1,54 @@
+<div *ngIf="isRegisterModalOpen">
+  <div class="modal-content text-white bg-slate-900 p-6 rounded-lg shadow-lg w-full max-w-md">
+    <div class="flex justify-between border-theme mb-6">
+      <h3 class="text-xl font-semibold">
+        {{ isRegisterModalOpen ? 'Adicionar Novo Filme' : 'Editar Filme' }}
+      </h3>
+      <span
+        *ngIf="isRegisterModalOpen"
+        class="font-bold rounded-4xl border border-1 border-slate-600/70 px-3 py-1 cursor-pointer translate-x-9 -translate-y-9"
+        (click)="closeModal()">X</span>
+    </div>
+
+    <form [formGroup]="movieModal" (ngSubmit)="isRegisterModalOpen ? registerMovie() : updateMovie()">
+      <div class="space-y-4">
+      <div>
+        <label for="title" class="block font-medium mb-1">Título</label>
+        <input id="title" formControlName="title" class="input mb-3 w-full" required>
+        <div *ngIf="movieModal.get('title')?.invalid && movieModal.get('title')?.touched" class="text-red-500 text-sm">
+        <div *ngIf="movieModal.get('title')?.errors?.['required']">O título é obrigatório.</div>
+        <div *ngIf="movieModal.get('title')?.errors?.['minlength']">O título deve ter pelo menos 2 caracteres.</div>
+        <div *ngIf="movieModal.get('title')?.errors?.['maxlength']">O título pode ter no máximo 100 caracteres.</div>
+        </div>
+      </div>
+
+      <div>
+        <label for="category" class="block font-medium mb-1">Categorias (separadas por vírgula)</label>
+        <input id="category" formControlName="category" class="input mb-3 w-full" required placeholder="Ex: Ação, Drama, Comédia">
+        <div *ngIf="movieModal.get('category')?.invalid && movieModal.get('category')?.touched" class="text-red-500 text-sm">
+        <div *ngIf="movieModal.get('category')?.errors?.['required']">As categorias são obrigatórias.</div>
+        <div *ngIf="movieModal.get('category')?.errors?.['minlength']">Informe pelo menos uma categoria.</div>
+        </div>
+      </div>
+
+      <div>
+        <label for="imageUrl" class="block font-medium mb-1">Imagem (URL)</label>
+        <input id="imageUrl" formControlName="imageUrl" class="input mb-3 w-full" required placeholder="https://exemplo.com/imagem.jpg">
+        <div *ngIf="movieModal.get('imageUrl')?.invalid && movieModal.get('imageUrl')?.touched" class="text-red-500 text-sm">
+        <div *ngIf="movieModal.get('imageUrl')?.errors?.['required']">A URL da imagem é obrigatória.</div>
+        <div *ngIf="movieModal.get('imageUrl')?.errors?.['pattern']">Informe uma URL válida.</div>
+        </div>
+      </div>
+      </div>
+
+      <div class="flex justify-end gap-2 mt-4">
+      <button type="submit" class="primary-button" [disabled]="movieModal.invalid">
+        {{ isRegisterModalOpen ? 'Adicionar' : 'Atualizar' }}
+      </button>
+      <button type="button" class="secondary-button" (click)="closeFormModal()">
+        Cancelar
+      </button>
+      </div>
+    </form>
+  </div>
+</div>

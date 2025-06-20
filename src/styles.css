@@ -82,3 +82,8 @@ button {
 .loading-container {
   @apply flex flex-row items-center justify-center bg-slate-800 h-screen;
 }
+
+.border-theme {
+  @apply border-b border-[#334155];
+
+}

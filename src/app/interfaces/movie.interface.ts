@@ -4,6 +4,7 @@ export interface iBasicMovie {
   category: string[],
   releaseDate: Date,
   director?: string,
+  trailerUrl?: string,
   imageUrl: string,
   cast?: string[]
 }
@@ -14,6 +15,7 @@ export interface iMovie {
   category: string[],
   releaseDate: Date,
   director?: string,
+  trailerUrl?: string,
   imageUrl: string,
   cast?: string[],
   ratings?: {
@@ -37,4 +39,11 @@ export interface iMovie {
 export interface iResponseMovie {
   message: string,
   movies: iMovie[]
+}
+
+export enum MOVIE_FORMS_TYPE {
+  REGISTER = 'REGISTER',
+  EDIT = 'EDIT',
+  DELETE = 'DELETE',
+  DETAILS = 'DETAILS'
 }
