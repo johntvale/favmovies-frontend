@@ -9,11 +9,12 @@ import { PaginationComponent } from "../pagination/pagination.component";
 import { DetailsModalComponent } from "../modals/details-modal/details-modal.component";
 import { FormModalComponent } from "../modals/form-modal/form-modal.component";
 import { DeleteModalComponent } from "../modals/delete-modal/delete-modal.component";
+import { LoadingComponent } from "../loading/loading.component";
 
 @Component({
   selector: 'app-movies-management',
   standalone: true,
-  imports: [CommonModule, FormsModule, PaginationComponent, DetailsModalComponent, FormModalComponent, DeleteModalComponent],
+  imports: [CommonModule, FormsModule, PaginationComponent, DetailsModalComponent, FormModalComponent, DeleteModalComponent, LoadingComponent],
   templateUrl: './movies-management.component.html',
   styleUrl: './movies-management.component.css'
 })
@@ -22,6 +23,7 @@ export class MoviesManagementComponent {
   movies = signal<iResponseMovie['movies'] | any >([]);
   filteredMovieList: iMovie[] = [];
   filteredAndPaginatedMovieList: iMovie[] = [];
+  isLoadindMovieList: boolean = false;
 
   searchFilter: string = '';
   lastMovieSearch: string = '';
@@ -37,11 +39,11 @@ export class MoviesManagementComponent {
   isDeleteModalOpen: boolean = false;
   currentModalType: string = '';
   
-  selectedMovie: iMovie | null = null;
+  selectedMovie = signal<iMovie | null>(null);
 
   constructor(
     private movieService: MovieService,
-    private toastr: ToastrService
+    private toastr: ToastrService,
   ) { }
 
   ngOnInit(){
@@ -49,10 +51,12 @@ export class MoviesManagementComponent {
   }
   
   getMovieList() {
+    this.isLoadindMovieList = true;
     this.movieService.getMovieList().subscribe({
       next: (response: iResponseMovie) => {
         this.movies.set(response.movies);
         this.filterMovieList();
+        this.isLoadindMovieList = false;
       },
       error: () => {
         this.toastr.error('Error ao iniciar lista de Filmes');
@@ -96,14 +100,14 @@ export class MoviesManagementComponent {
   openModal(modalType: string, movie?: iMovie) {
     switch (modalType) {
       case MOVIE_FORMS_TYPE.DETAILS:
-        this.currentModalType = modalType;
         this.isDetailsModalOpen = true;
         break;
         case MOVIE_FORMS_TYPE.REGISTER:
         this.currentModalType = modalType;
         this.isRegisterModalOpen = true;
         break;
-      case MOVIE_FORMS_TYPE.EDIT:
+        case MOVIE_FORMS_TYPE.EDIT:
+        this.currentModalType = modalType;
         this.isEditModalOpen = true;
         break;
       case MOVIE_FORMS_TYPE.DELETE:
@@ -111,7 +115,7 @@ export class MoviesManagementComponent {
     }
 
     if (movie) {
-      this.selectedMovie = movie;
+      this.selectedMovie.set(movie);
     }
   }
 
@@ -123,8 +127,12 @@ export class MoviesManagementComponent {
     this.currentModalType = '';
 
     if (this.selectedMovie) {
-      this.selectedMovie = null;
+      this.selectedMovie.set(null);
     }
+  }
+
+  getRowNumber(index: number): number {
+    return (this.currentPage - 1) * this.limitMoviesPerPage + index + 1;
   }
 
   @HostListener('document:keydown.escape', ['$event'])

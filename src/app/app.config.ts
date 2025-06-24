@@ -3,10 +3,11 @@ import {
   importProvidersFrom,
   provideZoneChangeDetection,
 } from '@angular/core';
+import { provideNgxMask } from 'ngx-mask';
+import { HTTP_INTERCEPTORS, provideHttpClient } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { provideToastr } from 'ngx-toastr';
 import { provideRouter } from '@angular/router';
-import { HTTP_INTERCEPTORS, provideHttpClient } from '@angular/common/http';
 import { HttpErrorInterceptor } from './interceptors/http-error.interceptor';
 
 import { routes } from './app.routes';
@@ -25,5 +26,6 @@ export const appConfig: ApplicationConfig = {
       toastClass: 'ngx-toastr custom-toast',
     }),
     { provide: HTTP_INTERCEPTORS, useClass: HttpErrorInterceptor, multi: true },
+    provideNgxMask()
   ]
 };

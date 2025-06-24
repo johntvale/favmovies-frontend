@@ -1,7 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
-import { iResponseMovie } from '../interfaces/movie.interface';
+import { map, Observable } from 'rxjs';
+import { iMovie, iResponseMovie } from '../interfaces/movie.interface';
+import { formatDateFromIsoToBr } from '../utils/formatter.util';
 
 @Injectable({
   providedIn: 'root'
@@ -12,22 +13,30 @@ export class MovieService {
   constructor(private http: HttpClient) { }
 
   getMovieList(): Observable<iResponseMovie> {
-    return this.http.get<iResponseMovie>(`${this.apiUrl}/search`, { withCredentials: true });
+    return this.http.get<iResponseMovie>(`${this.apiUrl}/search`, { withCredentials: true }).pipe(
+      map((response) => ({
+        ...response,
+        movies: response.movies.map((movie)=>({
+          ...movie,
+          releaseDate: formatDateFromIsoToBr(movie.releaseDate)
+        })),
+      })),
+    );
   }
 
-  createMovie(movie: any): Observable<iResponseMovie> {
-    return this.http.post<iResponseMovie>(`${this.apiUrl}/create`, movie, { withCredentials: true });
+  createMovie(movie: iMovie): Observable<iResponseMovie> {
+    return this.http.post<iResponseMovie>(`${this.apiUrl}/register`, movie, { withCredentials: true });
   }
 
-  updateMovie(movie: any): Observable<iResponseMovie> {
-    return this.http.put<iResponseMovie>(`${this.apiUrl}/update/${movie.id}`, movie, { withCredentials: true });
+  updateMovie(movie: iMovie, movieId: string): Observable<iResponseMovie> {
+    return this.http.patch<iResponseMovie>(`${this.apiUrl}/update/${movieId}`, movie, { withCredentials: true });
   }
 
   deleteMovie(movieId: string): Observable<iResponseMovie> {
-    return this.http.delete<iResponseMovie>(`${this.apiUrl}/delete/${movieId}`, { withCredentials: true });
+    return this.http.delete<iResponseMovie>(`${this.apiUrl}/remove/${movieId}`, { withCredentials: true });
   }
   
-  getMovieById(movieId: string): Observable<iResponseMovie> {
-    return this.http.get<iResponseMovie>(`${this.apiUrl}/details/${movieId}`, { withCredentials: true });
+  getMovieById(movie: iMovie, movieId: string): Observable<iResponseMovie> {
+    return this.http.get<iResponseMovie>(`${this.apiUrl}/search/${movieId}`, { withCredentials: true });
   }
 }

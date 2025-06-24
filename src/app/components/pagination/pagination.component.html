@@ -1,31 +1,45 @@
 <div class="flex justify-center mt-4 gap-2 items-center">
   <button
-    class="secondary-button"
+    class="secondary-button flex items-center justify-center gap-2"
     (click)="handlePageChange(1)"
     [disabled]="currentPage === 1"
   >
+    <div class="flex h-4 w-4 items-center justify-center transform scale-x-[-1]">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 14 14"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M.5 10.29a.7.7 0 0 0 .37.62a.71.71 0 0 0 .73 0l5.08-3.3a.7.7 0 0 0 0-1.18L1.6 3.11a.71.71 0 0 0-.73 0a.7.7 0 0 0-.37.62z"/><path d="M6.997 10.29a.7.7 0 0 0 .37.62a.71.71 0 0 0 .73 0l5.08-3.3a.7.7 0 0 0 0-1.18l-5.08-3.32a.71.71 0 0 0-.73 0a.7.7 0 0 0-.37.6zM13.5 2.5v9"/></g></svg>
+    </div>
     Primeira
   </button>
   <button
-    class="secondary-button"
+    class="secondary-button flex items-center justify-center gap-2"
     (click)="handlePageChange(currentPage - 1)"
     [disabled]="currentPage === 1"
   >
+    <div class="flex h-4 w-4 items-center justify-center transform scale-x-[-1]">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 14 14"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M.5 10.28a.7.7 0 0 0 .37.62a.71.71 0 0 0 .73 0l5.08-3.3a.7.7 0 0 0 0-1.18L1.6 3.1a.71.71 0 0 0-.73 0a.7.7 0 0 0-.37.62z"/><path d="M6.997 10.28a.7.7 0 0 0 .37.62a.71.71 0 0 0 .73 0l5.08-3.3a.7.7 0 0 0 0-1.18L8.097 3.1a.71.71 0 0 0-.73 0a.7.7 0 0 0-.37.6z"/></g></svg>
+    </div>
     Anterior
   </button>
+
   <span class="mx-2 text-xs">Página <span class="font-bold">{{ currentPage }}</span> de <span class="font-bold">{{ totalPages }}</span></span>
+  
   <button
-    class="secondary-button"
+    class="secondary-button flex items-center justify-center gap-2"
     (click)="handlePageChange(currentPage + 1)"
     [disabled]="currentPage === totalPages"
   >
     Próxima
+    <div class="flex h-4 w-4 items-center justify-center">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 14 14"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M.5 10.28a.7.7 0 0 0 .37.62a.71.71 0 0 0 .73 0l5.08-3.3a.7.7 0 0 0 0-1.18L1.6 3.1a.71.71 0 0 0-.73 0a.7.7 0 0 0-.37.62z"/><path d="M6.997 10.28a.7.7 0 0 0 .37.62a.71.71 0 0 0 .73 0l5.08-3.3a.7.7 0 0 0 0-1.18L8.097 3.1a.71.71 0 0 0-.73 0a.7.7 0 0 0-.37.6z"/></g></svg>
+    </div>
   </button>
   <button
-    class="secondary-button"
+    class="secondary-button flex items-center justify-center gap-2"
     (click)="handlePageChange(totalPages)"
     [disabled]="currentPage === totalPages"
   >
     Última
+    <div class="flex h-4 w-4 items-center justify-center">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 14 14"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M.5 10.29a.7.7 0 0 0 .37.62a.71.71 0 0 0 .73 0l5.08-3.3a.7.7 0 0 0 0-1.18L1.6 3.11a.71.71 0 0 0-.73 0a.7.7 0 0 0-.37.62z"/><path d="M6.997 10.29a.7.7 0 0 0 .37.62a.71.71 0 0 0 .73 0l5.08-3.3a.7.7 0 0 0 0-1.18l-5.08-3.32a.71.71 0 0 0-.73 0a.7.7 0 0 0-.37.6zM13.5 2.5v9"/></g></svg>
+    </div>
   </button>
 </div>

@@ -1,113 +1,136 @@
 <section class="container-section">
-  <div class="pb-2 ml-4">
-    <span class="font-semibold text-sm text-slate-500">MOVIES</span>
-  </div>
-
-  <div class="bg-slate-800 rounded-2xl p-4">
-    
-    <!-- FILTRO DE BUSCA -->
-    <div class="flex justify-between items-center mb-4">
-      <form (ngSubmit)="filterMovieList()" class="flex gap-2">
-        <input
-          type="text"
-          placeholder="Pesquisar filme..."
-          [(ngModel)]="searchFilter"
-          name="search"
-          class="border border-slate-300 text-slate-200! font-bold placeholder:font-normal placeholder:text-slate-400 outline-none focus:outline-none px-3 py-2 rounded"
-        >
-        <button type="submit" class="secondary-button">Pesquisar</button>
-      </form>
-      <button class="primary-button" (click)="openModal('REGISTER')">Adicionar Filme</button>
+  @if (isLoadindMovieList) {
+    <app-loading class="loading-container h-[350px]!"></app-loading>
+  } @else {
+    <div class="pb-2 ml-4">
+      <span class="font-semibold text-sm text-slate-500">MOVIES</span>
     </div>
-    
-    <!-- ÚLTIMA BUSCA REALIZADA -->
-    <div *ngIf="lastMovieSearch" class="my-3 text-sm text-slate-400">
-      Última busca: <strong>{{ lastMovieSearch }}</strong>
-      <a (click)="clearSearch()" class="text-blue-500 hover:underline ml-2 cursor-pointer">Limpar busca</a>
-    </div>    
 
-    <!-- TABELA DE FILMES -->
-    <div class="card">
-      <table class="table-auto w-full">
-        <thead>
-          <tr>
-            <th>#</th>
-            <th>Imagem</th>
-            <th>Título</th>
-            <th>Categorias</th>
-            <th>Ações</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let movie of filteredAndPaginatedMovieList; let i = index" class="hover:bg-teal-900 transition duration-200">
-            <td (click)="openModal('DETAILS', movie)">
-              <div class="flex items-center justify-center gap-2 cursor-pointer">
-                <span>{{ i + 1 }}</span>
-              </div>
-            </td>
-            <td (click)="openModal('DETAILS', movie)">
-              <div class="flex items-center justify-center gap-2 cursor-pointer">
-                <img [src]="movie.imageUrl" alt="Poster" class="movie-poster" width="80">
-              </div>
-            </td>
-            <td (click)="openModal('DETAILS', movie)">
-              <div class="cell-flex table-width-title cursor-pointer">
-                <span class="ellipsis-text"> {{ movie.title }} </span>
-              </div>
-            </td>
-            <td (click)="openModal('DETAILS', movie)">
-              <div class="cell-flex table-width-category cursor-pointer">
-                <span class="ellipsis-text"> {{ movie.category.join(', ') }} </span>
-              </div>
-            </td>
-            <td class="">
-              <div class="flex gap-2 items-center justify-center gap-2">
-                <button
-                  class="secondary-button"
-                  (click)="openModal('EDIT', movie)"
-                >
-                  Editar
-                </button>
-                <button
-                  class="danger-button"
-                  (click)="openModal('DELETE', movie)"
-                >
-                  Excluir
-                </button>
-              </div>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+    <div class="bg-slate-800 rounded-2xl p-4">
+      
+      <!-- FILTRO DE BUSCA -->
+      <div class="flex justify-between items-center mb-4">
+        <form (ngSubmit)="filterMovieList()" class="flex gap-2">
+          <input
+            type="text"
+            placeholder="Pesquisar filme..."
+            [(ngModel)]="searchFilter"
+            name="search"
+            class="border border-slate-300 text-slate-200! font-bold placeholder:font-normal placeholder:text-slate-400 outline-none focus:outline-none px-3 py-2 rounded"
+          >
+          <button type="submit" class="secondary-button flex items-center justify-center gap-2">
+            <div class="w-4 h-4">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path fill="currentColor" class="fill-slate-100" d="M12.9 14.32a8 8 0 1 1 1.41-1.41l5.35 5.33l-1.42 1.42l-5.33-5.34zM8 14A6 6 0 1 0 8 2a6 6 0 0 0 0 12z"/></svg>
+            </div>
+            <span class="inline-block">Pesquisar</span>
+          </button>
+        </form>
 
-      <!-- PAGINAÇÃO -->
-      <app-pagination
-        [currentPage]="currentPage"
-        [totalPages]="totalPages"
-        (pageChange)="handlePageChange($event)"
-      ></app-pagination>
-    </div>    
-  </div>
+        <button 
+          class="primary-button flex items-center justify-center gap-2"
+          (click)="openModal('REGISTER')"
+        >
+          <div class="w-4 h-4">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path fill="currentColor" d="M7 7V.5h2V7h6.5v2H9v6.5H7V9H.5V7z"/></svg>
+          </div>
+          <span class="inline-block">Adicionar Filme</span>
+        </button>
+      </div>
+      
+      <!-- ÚLTIMA BUSCA REALIZADA -->
+      <div *ngIf="lastMovieSearch" class="my-3 text-sm text-slate-400">
+        Última busca: <strong>{{ lastMovieSearch }}</strong>
+        <a (click)="clearSearch()" class="text-blue-500 hover:underline ml-2 cursor-pointer">Limpar busca</a>
+      </div>    
 
-  <app-details-modal
-    *ngIf="isDetailsModalOpen"
-    [selectedMovie]="selectedMovie"
-    [closeModal]="closeModal.bind(this)"
-  ></app-details-modal>
+      <!-- TABELA DE FILMES -->
+      <div class="card">
+        <table class="table-auto w-full">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Imagem</th>
+              <th>Título</th>
+              <th>Categorias</th>
+              <th>Ações</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let movie of filteredAndPaginatedMovieList; let i = index" class="hover:bg-teal-900 transition duration-200">
+              <td (click)="openModal('DETAILS', movie)">
+                <div class="flex items-center justify-center gap-2 cursor-pointer">
+                  <span>{{ getRowNumber(i) }}</span>
+                </div>
+              </td>
+              <td (click)="openModal('DETAILS', movie)">
+                <div class="flex items-center justify-center gap-2 cursor-pointer">
+                  <img [src]="movie.imageUrl" alt="Poster" class="movie-poster" width="80">
+                </div>
+              </td>
+              <td (click)="openModal('DETAILS', movie)">
+                <div class="cell-flex table-width-title cursor-pointer">
+                  <span class="ellipsis-text"> {{ movie.title }} </span>
+                </div>
+              </td>
+              <td (click)="openModal('DETAILS', movie)">
+                <div class="cell-flex table-width-category cursor-pointer">
+                  <span class="ellipsis-text"> {{ movie.category.join(', ') }} </span>
+                </div>
+              </td>
+              <td class="">
+                <div class="flex gap-2 items-center justify-center">
+                  <button 
+                    class="secondary-button flex items-center justify-center gap-2"
+                    (click)="openModal('EDIT', movie)"
+                  >
+                    <div class="w-4 h-4">
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="currentColor" d="M22 7.24a1 1 0 0 0-.29-.71l-4.24-4.24a1 1 0 0 0-.71-.29a1 1 0 0 0-.71.29l-2.83 2.83L2.29 16.05a1 1 0 0 0-.29.71V21a1 1 0 0 0 1 1h4.24a1 1 0 0 0 .76-.29l10.87-10.93L21.71 8a1.19 1.19 0 0 0 .22-.33a1 1 0 0 0 0-.24a.7.7 0 0 0 0-.14ZM6.83 20H4v-2.83l9.93-9.93l2.83 2.83ZM18.17 8.66l-2.83-2.83l1.42-1.41l2.82 2.82Z"/></svg>
+                    </div>
+                    <span class="inline-block">Editar</span>
+                  </button>
+                  <button 
+                    class="danger-button flex items-center justify-center gap-2"
+                    (click)="openModal('DELETE', movie)"
+                  >
+                    <div class="w-4 h-4">
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 7h16m-10 4v6m4-6v6M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2l1-12M9 7V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v3"/></svg>
+                    </div>
+                    <span class="inline-block">Excluir</span>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
 
-  <app-form-modal
-    *ngIf="isRegisterModalOpen || isEditModalOpen"
-    [selectedMovie]="selectedMovie"
-    [closeModal]="closeModal.bind(this)"
-    [isEditModalOpen]="isEditModalOpen"
-    [isRegisterModalOpen]="isRegisterModalOpen"
-    class="modal fixed inset-0 flex items-center justify-center bg-slate-950/80"
-  ></app-form-modal>
+        <!-- PAGINAÇÃO -->
+        <app-pagination
+          [currentPage]="currentPage"
+          [totalPages]="totalPages"
+          (pageChange)="handlePageChange($event)"
+        ></app-pagination>
+      </div>    
+    </div>
 
-  <app-delete-modal
-    *ngIf="isDeleteModalOpen"
-    [closeModal]="closeModal.bind(this)"
-    [selectedMovie]="selectedMovie"
-    class="modal fixed inset-0 flex items-center justify-center bg-slate-950/80"
-  ></app-delete-modal>
+    <app-details-modal
+      *ngIf="isDetailsModalOpen"
+      [selectedMovie]="selectedMovie"
+      [closeModal]="closeModal.bind(this)"
+    ></app-details-modal>
+
+    <app-form-modal
+      *ngIf="isRegisterModalOpen || isEditModalOpen"
+      [selectedMovie]="selectedMovie"
+      [closeModal]="closeModal.bind(this)"
+      [currentModalType]="currentModalType"
+      (activatedMovieForm)="getMovieList()"
+    ></app-form-modal>
+
+    <app-delete-modal
+      *ngIf="isDeleteModalOpen"
+      [closeModal]="closeModal.bind(this)"
+      [selectedMovie]="selectedMovie"
+      (activatedMovieDeletion)="getMovieList()"
+    ></app-delete-modal>
+  }
 </section>

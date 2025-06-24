@@ -1,17 +1,33 @@
-<div *ngIf="isDeleteModalOpen" class="modal fixed inset-0 flex items-center justify-center bg-slate-950/80">
-  <div class="modal-content text-white bg-slate-900 p-6 rounded-lg shadow-lg w-full max-w-md">
-    <div class="flex justify-between border-theme mb-6">
-      <h3 class="text-xl font-semibold">⚠️ Confirmar Exclusão</h3>
-      <span class="font-bold rounded-4xl border border-1 border-slate-600/70 px-3 py-1 cursor-pointer translate-x-9 -translate-y-9" (click)="closeDeleteModal()">X</span>
-    </div>
-
-    <div class="space-y-4">
-      <p>Você tem certeza de que deseja excluir o filme "{{ selectedMovie?.title }}"?</p>
-    </div>
-
-    <div class="flex justify-end gap-4 mt-6">
-      <button class="secondary-button" (click)="closeDeleteModal()">Cancelar</button>
-      <button class="danger-button" (click)="deleteMovie()">Excluir</button>
+<div class="fixed inset-0 flex items-center justify-center bg-slate-950/80 shadow-lg">
+  <div class="text-white bg-slate-900 p-6 rounded-lg shadow-lg w-full max-w-md min-w-[900px] flex flex-col items-center h-[440px] border border-[#334155]">
+    <h3 class="text-xl font-semibold pb-2 pl-4 border-theme mb-6 w-full">Confirmar Exclusão do filme "{{ selectedMovie()?.title}}"</h3>
+    <div class="h-full w-full flex flex-col justify-between">
+      <div class="flex h-full items-center justify-center">
+        <div class="space-y-4">
+          <p>Você tem certeza de que deseja excluir o filme "{{ selectedMovie()?.title }}"?</p>
+        </div>
+    
+      </div>
+      <div class="flex justify-end gap-4 mt-6">
+        <button 
+          class="danger-button flex items-center justify-center gap-2"
+          (click)="deleteMovie()"
+        >
+          <div class="w-4 h-4">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 7h16m-10 4v6m4-6v6M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2l1-12M9 7V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v3"/></svg>
+          </div>
+          <span class="inline-block">Confirmar Exclusão</span>
+        </button>
+        <button
+          class="secondary-button flex items-center justify-center gap-2"
+          (click)="closeModal()"
+        >
+          <div class="w-4 h-4">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path fill="currentColor" d="M10 8.586L2.929 1.515L1.515 2.929L8.586 10l-7.071 7.071l1.414 1.414L10 11.414l7.071 7.071l1.414-1.414L11.414 10l7.071-7.071l-1.414-1.414L10 8.586z"/></svg>
+          </div>
+          <span class="inline-block">Cancelar</span>
+        </button>
+      </div>
     </div>
   </div>
 </div>

@@ -1,6 +1,6 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, Signal } from '@angular/core';
 import { iMovie } from '../../../interfaces/movie.interface';
-import { CommonModule } from '@angular/common';
+
 
 @Component({
   selector: 'app-details-modal',
@@ -9,7 +9,7 @@ import { CommonModule } from '@angular/common';
   styleUrl: './details-modal.component.css'
 })
 export class DetailsModalComponent {
-  @Input() selectedMovie: iMovie | null = null;
+  @Input() selectedMovie!: Signal<iMovie | null>;
   @Input() closeModal!: () => void;
 
   closeDetailsModal() {

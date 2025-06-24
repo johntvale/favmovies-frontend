@@ -2,7 +2,7 @@ export interface iBasicMovie {
   title: string,
   description: string,
   category: string[],
-  releaseDate: Date,
+  releaseDate: string,
   director?: string,
   trailerUrl?: string,
   imageUrl: string,
@@ -10,10 +10,11 @@ export interface iBasicMovie {
 }
 
 export interface iMovie {
+  _id?: string,
   title: string,
   description: string,
   category: string[],
-  releaseDate: Date,
+  releaseDate: string,
   director?: string,
   trailerUrl?: string,
   imageUrl: string,
