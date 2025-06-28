@@ -1,21 +1,26 @@
 import { iMovie } from "./movie.interface";
 
 export interface iBasicUser {
-  id: string,
-  email: string,
-  name: string,
-  role: string
+  id: string;
+  email: string;
+  name: string;
+  role: 'user' | 'admin';
 }
 
 export interface iUser {
-  _id: string;
+  id: string;
   name: string;
   password: string;
   email: string;
   role: 'user' | 'admin';
-  favoriteList: iMovie[];  // Lista de filmes favoritos
-  watchLaterList: iMovie[]; // Lista de filmes para assistir depois
-  watchedList: iMovie[];    // Lista de filmes assistidos
-  createdAt: Date;
-  updatedAt: Date;
+  favoriteList: iMovie[];
+  watchLaterList: iMovie[];
+  watchedList: iMovie[];
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface iResponseBasicUser {
+  message: string;
+  users: iBasicUser[];
 }

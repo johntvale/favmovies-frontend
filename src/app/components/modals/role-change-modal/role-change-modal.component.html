@@ -1,23 +1,47 @@
 <div class="fixed inset-0 flex items-center justify-center bg-slate-950/80 shadow-lg">
   <div class="text-white bg-slate-900 p-6 rounded-lg shadow-lg w-full max-w-md min-w-[900px] flex flex-col items-center h-[440px] border border-[#334155]">
-    <h3 class="text-xl font-semibold pb-2 pl-4 tw-border-theme mb-6 w-full">Confirmar Exclusão do filme "{{ selectedMovie()?.title}}"</h3>
+
+    <h3 class="text-xl font-semibold pb-2 pl-4 tw-border-theme mb-6 w-full">
+      Confirmar {{ typeOfChange === 'promotion'? 'Promoção' : 'Rebaixamento'}} de {{ selectedUser()?.name }}?
+    </h3>
     <div class="h-full w-full flex flex-col justify-between">
       <div class="flex h-full items-center justify-center">
         <div class="space-y-4">
-          <p>Você tem certeza de que deseja excluir o filme "{{ selectedMovie()?.title }}"?</p>
+          <p *ngIf="typeOfChange === 'promotion'">
+            Você tem certeza que deseja <span class="underline">promover</span> {{ selectedUser()?.name }} a Administrador(a)?
+          <p>
+          <p *ngIf="typeOfChange === 'demotion'">
+            Você tem certeza que deseja <span class="underline">rebaixar</span> {{ selectedUser()?.name }} a Usuário(a)?
+          <p>
         </div>
     
       </div>
       <div class="flex justify-end gap-4 mt-6">
-        <button 
-          class="danger-button flex items-center justify-center gap-2"
-          (click)="deleteMovie()"
+
+        <!-- CONFIRMAR PROMOÇÃO -->
+        <button
+          *ngIf='typeOfChange === "promotion"'
+          class="primary-button flex items-center justify-center gap-2"
+          (click)="promoteToAdmin()"
         >
           <div class="w-4 h-4">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 7h16m-10 4v6m4-6v6M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2l1-12M9 7V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v3"/></svg>
           </div>
-          <span class="inline-block">Confirmar Exclusão</span>
+          <span class="inline-block">Confirmar Promoção</span>
         </button>
+
+        <!-- CONFIRMAR REBAIXAMENTO -->
+        <button 
+          *ngIf='typeOfChange === "demotion"'
+          class="danger-button flex items-center justify-center gap-2"
+          (click)="demoteToUser()"
+        >
+          <div class="w-4 h-4">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 7h16m-10 4v6m4-6v6M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2l1-12M9 7V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v3"/></svg>
+          </div>
+          <span class="inline-block">Confirmar Rebaixamento</span>
+        </button>
+
         <button
           class="secondary-button flex items-center justify-center gap-2"
           (click)="closeModal()"

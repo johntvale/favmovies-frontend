@@ -1,6 +1,6 @@
-<div class="container-section">
+<div class="tw-container-section">
   @if (isLoadingInsights) {
-    <app-loading class="loading-container h-[350px]!"></app-loading>
+    <app-loading></app-loading>
   } @else {
 
     <!-- ----------------------------------------------------------------------- -->
@@ -21,7 +21,7 @@
       
       <!-- Top 3 Filmes Mais Favoritados -->
       <div class="bg-slate-800 rounded-2xl p-4 col-span-2">
-        <h3 class="text-lg font-semibold border-b border-[#334155] pb-2 mb-8">Top 3 Filmes Mais Favoritados</h3>
+        <h3 class="text-lg font-semibold tw-border-theme pb-2 mb-8">Top 3 Filmes Mais Favoritados</h3>
         <div class="top-movies-ranked flex gap-4">
           <app-movie-card
             [movie]="favorites().top3Favorites[0]"
@@ -74,7 +74,7 @@
 
       <!-- Top 3 Filmes Mais Assistidos -->
       <div class="bg-slate-800 rounded-2xl p-4 col-span-2">
-        <h3 class="text-lg font-semibold border-b border-[#334155] pb-2 mb-8">Top 3 Filmes Mais Assistidos</h3>
+        <h3 class="text-lg font-semibold tw-border-theme pb-2 mb-8">Top 3 Filmes Mais Assistidos</h3>
         <div class="top-movies-ranked flex gap-4">
           <app-movie-card
             [movie]="watched().top3MostWatched[0]"
@@ -135,7 +135,7 @@
 
       <!-- Top 3 Filmes Mais Avaliados -->
       <div class="bg-slate-800 rounded-2xl p-4 col-span-2">
-        <h3 class="text-lg font-semibold border-b border-[#334155] pb-2 mb-8">Top 3 Filmes Com Melhores Avaliações</h3>
+        <h3 class="text-lg font-semibold tw-border-theme pb-2 mb-8">Top 3 Filmes Com Melhores Avaliações</h3>
         <div class="top-movies-ranked flex gap-4">
           <app-movie-card
             [movie]="ratings().top3Ratings[0]"

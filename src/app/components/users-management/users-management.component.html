@@ -1,0 +1,123 @@
+<section class="container-section">
+  @if (isLoadingUserList) {
+    <app-loading></app-loading>
+  } @else {
+    <div class="pb-2 ml-4">
+      <span class="font-semibold text-sm text-slate-500">USUÁRIOS</span>
+      <span class="font-normal text-sm text-slate-500"> - Controle de acesso ao Painel Administrativo</span>
+    </div>
+    
+    <div class="bg-slate-800 rounded-2xl p-4">
+      
+      <!-- FILTRO DE BUSCA -->
+      <div class="flex justify-between items-center mb-4">
+        <form (ngSubmit)="filterUserList()" class="flex gap-2">
+          <input
+            type="text"
+            placeholder="Pesquisar usuário..."
+            [(ngModel)]="userSearch"
+            name="userSearch"
+            class="border border-slate-300 text-slate-200! font-bold placeholder:font-normal placeholder:text-slate-400 outline-none focus:outline-none px-3 py-2 rounded"
+          >
+          <button type="submit" class="secondary-button flex items-center justify-center gap-2">
+            <div class="w-4 h-4">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path fill="currentColor" class="fill-slate-100" d="M12.9 14.32a8 8 0 1 1 1.41-1.41l5.35 5.33l-1.42 1.42l-5.33-5.34zM8 14A6 6 0 1 0 8 2a6 6 0 0 0 0 12z"/></svg>
+            </div>
+            <span class="inline-block">Pesquisar</span>
+          </button>
+        </form>
+        <div class="text-end text-slate-300 text-xs mr-2 flex flex-col gap-1">
+          <div><span class="font-normal">
+            Usuários cadastrados: <strong class="text-teal-300">{{totalUsers}}</strong></span></div>
+          <div><span class="font-normal">Total de Administradores: <strong class="text-teal-300">{{totalAdmins()}}</strong></span></div>
+        </div>
+      </div>
+      
+      <!-- ÚLTIMA BUSCA REALIZADA -->
+      <div *ngIf="lastUserSearch" class="my-3 text-sm text-slate-400">
+        Última busca: <strong>{{ lastUserSearch }}</strong>
+        <a (click)="clearSearch()" class="text-blue-500 hover:underline ml-2 cursor-pointer">Limpar busca</a>
+      </div>    
+
+      <!-- TABELA DE USUÁRIOS -->
+      <div>
+        <table class="w-full table-fixed">
+          <thead>
+            <tr class="tw-border-theme h-[50px]">
+              <th class="py-4 w-[60px]">#</th>
+              <th class="py-4 w-[200px]">Nome</th>
+              <th class="py-4 w-[250px]">E-mail</th>
+              <th class="py-4">Perfil</th>
+              <th class="py-4">Ação</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let user of filteredAndPaginatedUserList; let i = index" class="hover:bg-teal-900 transition duration-200 tw-border-theme h-[50px]">
+              <td class="text-center py-4">
+                <div class="flex items-center justify-center gap-2">
+                  <span>{{ getRowNumber(i) }}</span>
+                </div>
+              </td>
+              <td class="text-start py-4">
+                <div class="cell-flex table-width-title">
+                  <span class="ellipsis-text"> {{ user.name }} </span>
+                </div>
+              </td>
+              <td class="text-start py-4">
+                <div class="cell-flex table-width-category">
+                  <span class="ellipsis-text"> {{ user.email }} </span>
+                </div>
+              </td>
+              <td class="text-center py-4">
+                <div class="cell-flex table-width-category text-xs select-none">
+                  <span *ngIf="user.role === 'admin'" class="ellipsis-text font-medium text-white bg-teal-500 py-2 px-3 rounded-4xl capitalize">{{ user.role }}</span>
+                  <span *ngIf="user.role === 'user'" class="ellipsis-text font-normal text-slate-700 bg-slate-100 py-2 px-3 rounded-4xl font-semibold capitalize">{{ user.role }}</span>
+                </div>
+              </td>
+              <td class="">
+                <div class="flex gap-2 items-center justify-center">
+                  <button 
+                    *ngIf="user.role === 'admin'"
+                    class="danger-button flex items-center justify-center gap-2"
+                    (click)="openRoleChangeModal(user, 'demotion')"
+                    >
+                    <div class="w-4 h-4">
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 18H5L3.135 8.673a.25.25 0 0 1 .4-.244L8 12l1.6-2.4m1.596-2.394L12 6l4 6l4.464-3.571a.25.25 0 0 1 .401.244l-1.363 6.818M3 3l18 18"/></svg>
+                    </div>
+                    <span class="inline-block">Rebaixar</span>
+                  </button>
+                  <button 
+                    *ngIf="user.role === 'user'"
+                    class="primary-button flex items-center justify-center gap-2"
+                    (click)="openRoleChangeModal(user, 'promotion')"
+                  >
+                  <div class="w-4 h-4">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m12 6l4 6l5-4l-2 10H5L3 8l5 4z"/></svg>
+                  </div>
+                  <span class="inline-block">Promover</span>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <!-- PAGINAÇÃO -->
+        <app-pagination
+          [currentPage]="currentPage"
+          [totalPages]="totalPages"
+          (pageChange)="handlePageChange($event)"
+        ></app-pagination>
+
+        <!-- PROMOVER / REBAIXAR USUÁRIO -->
+        <app-role-change-modal
+          *ngIf="isRoleChangeModalOpen"
+          [selectedUser]="selectedUser"
+          [closeRoleChangeModal]="closeRoleChangeModal.bind(this)"
+          [typeOfChange]="typeOfChange"
+          (roleChangeCompleted)="getUserList()"
+        ></app-role-change-modal>
+      </div>
+    </div>
+  }
+</section>

@@ -1,9 +1,10 @@
 <section class="container-section">
-  @if (isLoadindMovieList) {
-    <app-loading class="loading-container h-[350px]!"></app-loading>
+  @if (isLoadingMovieList) {
+    <app-loading></app-loading>
   } @else {
     <div class="pb-2 ml-4">
-      <span class="font-semibold text-sm text-slate-500">MOVIES</span>
+      <span class="font-semibold text-sm text-slate-500">FILMES</span>
+      <span class="font-normal text-sm text-slate-500"> - Gerenciamento</span>
     </div>
 
     <div class="bg-slate-800 rounded-2xl p-4">
@@ -22,7 +23,7 @@
             <div class="w-4 h-4">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path fill="currentColor" class="fill-slate-100" d="M12.9 14.32a8 8 0 1 1 1.41-1.41l5.35 5.33l-1.42 1.42l-5.33-5.34zM8 14A6 6 0 1 0 8 2a6 6 0 0 0 0 12z"/></svg>
             </div>
-            <span class="inline-block">Pesquisar</span>
+            <span>Pesquisar</span>
           </button>
         </form>
 
@@ -33,7 +34,7 @@
           <div class="w-4 h-4">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path fill="currentColor" d="M7 7V.5h2V7h6.5v2H9v6.5H7V9H.5V7z"/></svg>
           </div>
-          <span class="inline-block">Adicionar Filme</span>
+          <span>Adicionar Filme</span>
         </button>
       </div>
       
@@ -44,40 +45,40 @@
       </div>    
 
       <!-- TABELA DE FILMES -->
-      <div class="card">
-        <table class="table-auto w-full">
+      <div>
+        <table class="w-full table-fixed">
           <thead>
-            <tr>
-              <th>#</th>
-              <th>Imagem</th>
-              <th>Título</th>
-              <th>Categorias</th>
-              <th>Ações</th>
+            <tr class="tw-border-theme h-[50px]">
+              <th class="p-4 w-[50px]">#</th>
+              <th class="p-4 w-[80px]">Imagem</th>
+              <th class="p-4 w-[300px]">Título</th>
+              <th class="p-4 w-[150px]">Categorias</th>
+              <th class="p-4 w-[200px]">Ações</th>
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let movie of filteredAndPaginatedMovieList; let i = index" class="hover:bg-teal-900 transition duration-200">
-              <td (click)="openModal('DETAILS', movie)">
+            <tr *ngFor="let movie of filteredAndPaginatedMovieList; let i = index" class="hover:bg-teal-900 transition duration-200 tw-border-theme h-[50px]">
+              <td (click)="openModal('DETAILS', movie)" class="p-4">
                 <div class="flex items-center justify-center gap-2 cursor-pointer">
                   <span>{{ getRowNumber(i) }}</span>
                 </div>
               </td>
-              <td (click)="openModal('DETAILS', movie)">
-                <div class="flex items-center justify-center gap-2 cursor-pointer">
-                  <img [src]="movie.imageUrl" alt="Poster" class="movie-poster" width="80">
+              <td (click)="openModal('DETAILS', movie)" class="p-4 flex justify-center">
+                <div class="flex items-center justify-center gap-2 cursor-pointer w-[40px]">
+                  <img [src]="movie.imageUrl" alt="Poster">
                 </div>
               </td>
-              <td (click)="openModal('DETAILS', movie)">
-                <div class="cell-flex table-width-title cursor-pointer">
-                  <span class="ellipsis-text"> {{ movie.title }} </span>
+              <td (click)="openModal('DETAILS', movie)" class="p-4">
+                <div class="flex items-center h-[60px] w-[250px] cursor-pointer">
+                  <span class="whitespace-nowrap overflow-hidden text-ellipsis block w-full"> {{ movie.title }} </span>
                 </div>
               </td>
-              <td (click)="openModal('DETAILS', movie)">
-                <div class="cell-flex table-width-category cursor-pointer">
-                  <span class="ellipsis-text"> {{ movie.category.join(', ') }} </span>
+              <td (click)="openModal('DETAILS', movie)" class="p-4">
+                <div class="flex items-center h-[60px] w-[150px] cursor-pointer">
+                  <span class="whitespace-nowrap overflow-hidden text-ellipsis block w-full"> {{ movie.category.join(', ') }} </span>
                 </div>
               </td>
-              <td class="">
+              <td class="p-4">
                 <div class="flex gap-2 items-center justify-center">
                   <button 
                     class="secondary-button flex items-center justify-center gap-2"
@@ -86,7 +87,7 @@
                     <div class="w-4 h-4">
                       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="currentColor" d="M22 7.24a1 1 0 0 0-.29-.71l-4.24-4.24a1 1 0 0 0-.71-.29a1 1 0 0 0-.71.29l-2.83 2.83L2.29 16.05a1 1 0 0 0-.29.71V21a1 1 0 0 0 1 1h4.24a1 1 0 0 0 .76-.29l10.87-10.93L21.71 8a1.19 1.19 0 0 0 .22-.33a1 1 0 0 0 0-.24a.7.7 0 0 0 0-.14ZM6.83 20H4v-2.83l9.93-9.93l2.83 2.83ZM18.17 8.66l-2.83-2.83l1.42-1.41l2.82 2.82Z"/></svg>
                     </div>
-                    <span class="inline-block">Editar</span>
+                    <span>Editar</span>
                   </button>
                   <button 
                     class="danger-button flex items-center justify-center gap-2"
@@ -95,7 +96,7 @@
                     <div class="w-4 h-4">
                       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 7h16m-10 4v6m4-6v6M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2l1-12M9 7V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v3"/></svg>
                     </div>
-                    <span class="inline-block">Excluir</span>
+                    <span>Excluir</span>
                   </button>
                 </div>
               </td>

@@ -1,11 +1,5 @@
 @import "tailwindcss";
 
-.container-section {
-  max-width: 1200px;
-  margin: auto;
-  color: white;
-}
-
 header a, aside a {
   @apply transition duration-200 hover:drop-shadow-[0_0_2px_white] hover:drop-shadow-[0_0_4px_white] hover:drop-shadow-[0_0_6px_white] cursor-pointer;
 }
@@ -16,10 +10,6 @@ input {
   
 button {
   @apply bg-green-600 text-white text-sm font-medium px-5 py-2 rounded-md hover:bg-green-700 disabled:opacity-50 disabled:cursor-not-allowed transition duration-200 ease-in-out;
-}
-
-.selected {
-  @apply font-bold bg-teal-700 text-white;
 }
 
 .primary-button {
@@ -79,11 +69,18 @@ button {
   @apply bg-amber-600 border-amber-700 hover:bg-amber-700;
 }
 
-.loading-container {
-  @apply flex flex-row items-center justify-center bg-slate-800 h-screen;
+.tw-container-section {
+  @apply m-auto text-white;
 }
 
-.border-theme {
-  @apply border-b border-[#334155];
+.tw-loading-container {
+  @apply flex flex-row items-center justify-center bg-slate-800 h-[350px];
+}
 
+.tw-border-theme {
+  @apply border-b border-[#334155];
+}
+
+.tw-selected {
+  @apply font-bold bg-teal-700 text-white;
 }

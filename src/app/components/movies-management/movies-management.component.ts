@@ -23,7 +23,7 @@ export class MoviesManagementComponent {
   movies = signal<iResponseMovie['movies'] | any >([]);
   filteredMovieList: iMovie[] = [];
   filteredAndPaginatedMovieList: iMovie[] = [];
-  isLoadindMovieList: boolean = false;
+  isLoadingMovieList: boolean = false;
 
   searchFilter: string = '';
   lastMovieSearch: string = '';
@@ -51,15 +51,15 @@ export class MoviesManagementComponent {
   }
   
   getMovieList() {
-    this.isLoadindMovieList = true;
+    this.isLoadingMovieList = true;
     this.movieService.getMovieList().subscribe({
       next: (response: iResponseMovie) => {
         this.movies.set(response.movies);
         this.filterMovieList();
-        this.isLoadindMovieList = false;
+        this.isLoadingMovieList = false;
       },
       error: () => {
-        this.toastr.error('Error ao iniciar lista de Filmes');
+        this.toastr.error('Error ao baixar lista de Filmes');
       }
     });
   }

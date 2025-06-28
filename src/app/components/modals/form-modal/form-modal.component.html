@@ -1,9 +1,9 @@
 <div class="fixed inset-0 flex items-center justify-center bg-slate-950/80 shadow-lg ">
   <div class="text-white bg-slate-900 p-6 rounded-lg shadow-lg w-full max-w-md min-w-[900px] flex flex-col items-center h-[540px] border border-[#334155]">
-    <h3 *ngIf="currentModalType === 'REGISTER'" class="text-xl font-semibold pb-2 mb-4 pl-4 border-theme mb-6 w-full">
+    <h3 *ngIf="currentModalType === 'REGISTER'" class="text-xl font-semibold pb-2 mb-4 pl-4 tw-border-theme mb-6 w-full">
       Adicionar Novo Filme
     </h3>
-    <h3 *ngIf="currentModalType === 'EDIT'" class="text-xl font-semibold pb-2 mb-4 pl-4 border-theme mb-6 w-full">
+    <h3 *ngIf="currentModalType === 'EDIT'" class="text-xl font-semibold pb-2 mb-4 pl-4 tw-border-theme mb-6 w-full">
       Editar informações do filme "{{ selectedMovie()?.title }}"
     </h3>
 

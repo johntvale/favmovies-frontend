@@ -37,12 +37,9 @@ export class DashboardComponent {
           this.watched.set(result.insights.watched);
           this.ratings.set(result.insights.ratings);
         }
-      },
-      complete: () => {
         this.isLoadingInsights = false;
       },
       error: () => {
-        this.isLoadingInsights = false;
       },
     });
   };
