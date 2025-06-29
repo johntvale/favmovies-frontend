@@ -1,8 +1,8 @@
-import { Component, inject, Signal } from '@angular/core';
+import { Router } from '@angular/router';
+import { Component } from '@angular/core';
+
 import { NgIcon, provideIcons } from '@ng-icons/core';
 import { bootstrapBoxArrowRight, bootstrapCollectionPlay, bootstrapColumnsGap, bootstrapPeople, bootstrapSliders } from '@ng-icons/bootstrap-icons';
-
-import { AdminComponent } from '../../pages/admin/admin.component';
 
 @Component({
   selector: 'app-aside-menu',
@@ -11,10 +11,15 @@ import { AdminComponent } from '../../pages/admin/admin.component';
   ],
   viewProviders: [provideIcons({ bootstrapCollectionPlay, bootstrapPeople, bootstrapColumnsGap, bootstrapSliders, bootstrapBoxArrowRight })],
   templateUrl: './aside-menu.component.html',
-  styleUrl: './aside-menu.component.css'
+  styleUrls: ['./aside-menu.component.css']
 })
 export class AsideMenuComponent {
-  activeSection: Signal<string> = inject(AdminComponent).activeSection;
+  activeSection: string = '';
 
-  onSectionSelected = inject(AdminComponent).onSectionSelected;
+  constructor(private router: Router) {}
+
+  activateSection(section: string) {
+    this.activeSection = section;
+    this.router.navigateByUrl(`admin/${section}`);
+  }
 }
