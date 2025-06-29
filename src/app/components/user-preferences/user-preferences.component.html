@@ -1,0 +1,140 @@
+<section class="container-section">
+  @if (isLoadingUserPreferences) {
+    <app-loading></app-loading>
+  } @else {
+    <div class="pb-2 ml-4">
+      <span class="font-semibold text-sm text-slate-500 uppercase">Preferências</span>
+      <span class="font-normal text-sm text-slate-500"> - Informações pessoais</span>
+    </div>
+
+    <div class="bg-slate-800 rounded-2xl p-4">
+      <h3 class="text-xl font-semibold pb-2 pl-4 tw-border-theme mb-6 w-full">Informações Pessoais</h3>
+      <form class="w-full flex flex-col justify-between h-full" [formGroup]="userPreferencesForm" (ngSubmit)="savePreferences()" [class.select-none]="!isEditingPreferences">
+        <div class="w-full mb-10 px-4">
+          
+          <!-- Campo Nome -->
+          <div [class.select-none]="!isEditingPreferences">
+            <label for="name" class="block font-medium mb-1">Nome</label>
+            <input
+              id="name"
+              formControlName="name"
+              type="text"
+              [ngClass]="[
+                'text-sm font-medium placeholder:text-slate-500! mb-3',
+                isEditingPreferences ? 'text-white!' : 'bg-slate-800! text-slate-400!'
+              ]"
+              autocomplete="name"
+            />
+            <div class="text-red-500 text-sm mt-[-10px] mb-2">
+              <div *ngIf="userPreferencesForm.get('name')?.invalid && userPreferencesForm.get('name')?.touched">
+                <span *ngIf="userPreferencesForm.get('name')?.errors?.['required']">O nome é obrigatório.</span>
+                <span *ngIf="userPreferencesForm.get('name')?.errors?.['minlength']">O nome deve ter pelo menos 6 caracteres.</span>
+                <span *ngIf="userPreferencesForm.get('name')?.errors?.['maxlength']">O nome pode ter no máximo 30 caracteres.</span>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Campo Email -->
+          <div [class.select-none]="!isEditingPreferences">
+            <label for="email" class="block font-medium mb-1">Email</label>
+            <input
+              id="email"
+              formControlName="email"
+              type="email"
+              [ngClass]="[
+                'text-sm font-medium placeholder:text-slate-500! mb-3',
+                isEditingPreferences ? 'text-white!' : 'bg-slate-800! text-slate-400!'
+              ]"
+              placeholder="Ex: exemplo@dominio.com"
+              autocomplete="email"
+            />
+            <div class="text-red-500 text-sm mt-[-10px] mb-2">
+              <div *ngIf="userPreferencesForm.get('email')?.invalid && userPreferencesForm.get('email')?.touched">
+                <span *ngIf="userPreferencesForm.get('email')?.errors?.['required']">O email é obrigatório.</span>
+                <span *ngIf="userPreferencesForm.get('email')?.errors?.['email']">Informe um email válido.</span>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Campo Senha -->
+          <div [class.select-none]="!isEditingPreferences">
+            <div class="flex flex-row items-center justify-start mb-1">
+              <label for="password" class="block font-medium">Senha</label>
+              <div class="flex flex-row items-center ml-4">
+                <input
+                  id="keepPassword"
+                  type="checkbox"
+                  formControlName="keepPassword"
+                  class="h-4! w-4! accent-slate-600 mr-1"
+                />
+                <label
+                  for="keepPassword"
+                  class="text-xs w-full"
+                  [ngClass]="isEditingPreferences ? 'text-white' : 'bg-slate-800! text-slate-400!'"
+                >
+                  Manter senha atual
+                </label>
+              </div>
+            </div>
+          
+            <input
+              id="password"
+              formControlName="password"
+              type="password"
+              [ngClass]="[
+                'text-sm font-medium placeholder:text-slate-500! mb-3',
+                isEditingPreferences
+                  ? userPreferencesForm.get('keepPassword')?.value
+                    ? 'bg-slate-800! text-slate-400!'
+                    : 'text-white!'
+                  : 'bg-slate-800! text-slate-400!'
+              ]"
+              placeholder="Digite sua senha"
+              autocomplete="current-password"
+            />
+          
+            <div class="text-red-500 text-sm mt-[-10px] mb-2">
+              <div *ngIf="userPreferencesForm.get('password')?.invalid && userPreferencesForm.get('password')?.touched">
+                <span *ngIf="userPreferencesForm.get('password')?.errors?.['required']">A senha é obrigatória.</span>
+                <span *ngIf="userPreferencesForm.get('password')?.errors?.['minlength']">A senha deve ter pelo menos 6 caracteres.</span>
+                <span *ngIf="userPreferencesForm.get('password')?.errors?.['maxlength']">A senha pode ter no máximo 20 caracteres.</span>
+                <span *ngIf="userPreferencesForm.get('password')?.errors?.['pattern']">A senha deve conter letras, números e caracteres especiais.</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      
+        <!-- Botões -->
+        <div class="flex justify-center gap-2 w-full">
+          <button *ngIf="!isEditingPreferences" type="button" class="primary-button flex items-center justify-center" (click)="openEditMode()">
+            <div class="w-4 h-4 mr-2">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="currentColor" d="M22 7.24a1 1 0 0 0-.29-.71l-4.24-4.24a1 1 0 0 0-.71-.29a1 1 0 0 0-.71.29l-2.83 2.83L2.29 16.05a1 1 0 0 0-.29.71V21a1 1 0 0 0 1 1h4.24a1 1 0 0 0 .76-.29l10.87-10.93L21.71 8a1.19 1.19 0 0 0 .22-.33a1 1 0 0 0 0-.24a.7.7 0 0 0 0-.14ZM6.83 20H4v-2.83l9.93-9.93l2.83 2.83ZM18.17 8.66l-2.83-2.83l1.42-1.41l2.82 2.82Z"/></svg>
+            </div>
+            <span class="inline-block">Editar Preferências</span>
+          </button>
+      
+          <div *ngIf="isEditingPreferences" class="flex flex-row items-center gap-2">
+            <button
+              type="submit"
+              class="primary-button flex items-center justify-center"
+              [disabled]="isSaveButtonDisabled"
+            >
+              <div class="w-4 h-4 mr-2">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="currentColor" d="M22 7.24a1 1 0 0 0-.29-.71l-4.24-4.24a1 1 0 0 0-.71-.29a1 1 0 0 0-.71.29l-2.83 2.83L2.29 16.05a1 1 0 0 0-.29.71V21a1 1 0 0 0 1 1h4.24a1 1 0 0 0 .76-.29l10.87-10.93L21.71 8a1.19 1.19 0 0 0 .22-.33a1 1 0 0 0 0-.24a.7.7 0 0 0 0-.14ZM6.83 20H4v-2.83l9.93-9.93l2.83 2.83ZM18.17 8.66l-2.83-2.83l1.42-1.41l2.82 2.82Z"/></svg>
+              </div>
+              <span class="inline-block">Salvar Alterações</span>
+            </button>
+      
+            <button type="button" class="secondary-button flex items-center justify-center gap-2" (click)="closeEditMode()">
+              <div class="w-4 h-4">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path fill="currentColor" d="M10 8.586L2.929 1.515L1.515 2.929L8.586 10l-7.071 7.071l1.414 1.414L10 11.414l7.071 7.071l1.414-1.414L11.414 10l7.071-7.071l-1.414-1.414L10 8.586z"/></svg>
+              </div>
+              Cancelar
+            </button>
+          </div>
+        </div>
+      </form>      
+      
+    </div>
+  }
+</section>

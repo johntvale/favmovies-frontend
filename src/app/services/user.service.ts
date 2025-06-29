@@ -1,7 +1,7 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map, Observable } from 'rxjs';
-import { iBasicUser, iResponseBasicUser } from '../interfaces/user.interface';
+import { iBasicUser, iResponseBasicUser, iResponseUser, iUser } from '../interfaces/user.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -21,6 +21,12 @@ export class UserService {
     );
   }
 
+  getUserById(userId: string): Observable<iUser> {
+    return this.http.get<iResponseUser>(`${this.apiUrl}/search/${userId}`, { withCredentials: true }).pipe(
+      map(response => response.user)
+    );
+  }
+
   promoteUserToAdmin(userId: string) {
     return this.http.patch<iResponseBasicUser>(
       `${this.apiUrl}/update/${userId}`,
@@ -33,6 +39,14 @@ export class UserService {
     return this.http.patch<iResponseBasicUser>(
       `${this.apiUrl}/update/${userId}`,
       { "role": "user" },
+      { withCredentials: true }
+    );
+  }
+
+  updateUserData(userData: iUser, userId: string): Observable<iResponseBasicUser> {
+    return this.http.patch<iResponseBasicUser>(
+      `${this.apiUrl}/update/${userId}`,
+      userData,
       { withCredentials: true }
     );
   }

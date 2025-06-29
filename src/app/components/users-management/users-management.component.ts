@@ -17,6 +17,7 @@ import { RoleChangeModalComponent } from "../modals/role-change-modal/role-chang
 export class UsersManagementComponent {
   userList = signal<iBasicUser[]>([]);
   totalAdmins = signal<Number>(0);
+  totalRegularUsers = signal<Number>(0);
   filteredUserList: iBasicUser[] = [];
   filteredAndPaginatedUserList: iBasicUser[] = [];
   isLoadingUserList: boolean = false;
@@ -52,6 +53,7 @@ export class UsersManagementComponent {
           if (user.role.toLowerCase() === 'admin') adminsCount += 1
         })
         this.totalAdmins.set(adminsCount);
+        this.totalRegularUsers.set(users.length - adminsCount );
         this.filterUserList();
         this.isLoadingUserList = false;
       },

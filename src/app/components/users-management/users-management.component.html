@@ -4,7 +4,7 @@
   } @else {
     <div class="pb-2 ml-4">
       <span class="font-semibold text-sm text-slate-500">USUÁRIOS</span>
-      <span class="font-normal text-sm text-slate-500"> - Controle de acesso ao Painel Administrativo</span>
+      <span class="font-normal text-sm text-slate-500"> - Gerenciamento de Perfis</span>
     </div>
     
     <div class="bg-slate-800 rounded-2xl p-4">
@@ -26,10 +26,19 @@
             <span class="inline-block">Pesquisar</span>
           </button>
         </form>
-        <div class="text-end text-slate-300 text-xs mr-2 flex flex-col gap-1">
-          <div><span class="font-normal">
-            Usuários cadastrados: <strong class="text-teal-300">{{totalUsers}}</strong></span></div>
-          <div><span class="font-normal">Total de Administradores: <strong class="text-teal-300">{{totalAdmins()}}</strong></span></div>
+        <div class="flex flex-row items-center gap-2 text-xs border border-[#334155] p-2 rounded-lg">
+          <div class="flex flex-col items-center h-10 border-sm items-center justify-around">
+            <span class="h-3.5 rounded w-3.5 rounded bg-teal-500"></span>
+            <span class="h-3.5 rounded w-3.5 rounded bg-slate-100"></span>
+          </div>
+          <div class="flex flex-col items-center h-10 border-sm items-center justify-around ">
+            <span class="font-normal mr-auto">Total de Admin:</span>
+            <span class="font-normal mr-auto">Total de User:</span>
+          </div>
+          <div class="flex flex-col items-center h-10 border-sm items-center justify-around">
+            <span><strong class="text-teal-300">{{ totalAdmins() }}</strong></span>
+            <span><strong class="text-teal-300">{{ totalRegularUsers() }}</strong></span>
+          </div>
         </div>
       </div>
       

@@ -45,7 +45,7 @@ export class RoleChangeModalComponent {
       this.userService.promoteUserToAdmin(this.selectedUser()?.id!).subscribe({
         next: (response: iResponseBasicUser) => {
           if (response.message.includes('success')) {
-            this.toastr.success('Usuário(a) Promovido(a) com sucesso.')
+            this.toastr.success(`${this.selectedUser()!.name} Promovido(a) com sucesso.`)
             this.closeModal();
             this.roleChangeCompleted.emit()
           }
@@ -60,11 +60,11 @@ export class RoleChangeModalComponent {
   }
 
   demoteToUser() {
-    if (this.userLoggedIn().id !== this.selectedUser()?.id) {
-      this.userService.demoteAdminToUser(this.selectedUser()?.id!).subscribe({
+    if (this.userLoggedIn().id !== this.selectedUser()!.id) {
+      this.userService.demoteAdminToUser(this.selectedUser()!.id).subscribe({
         next: (response: iResponseBasicUser) => {
           if (response.message.includes('success')) {
-            this.toastr.success('Administrador(a) Rebaixado(a) com sucesso.')
+            this.toastr.success(`${this.selectedUser()!.name} Rebaixado(a) com sucesso.`)
             this.closeModal();
             this.roleChangeCompleted.emit();
           }

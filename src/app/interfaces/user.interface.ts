@@ -24,3 +24,8 @@ export interface iResponseBasicUser {
   message: string;
   users: iBasicUser[];
 }
+
+export interface iResponseUser {
+  message: string;
+  user: iUser;
+}
