@@ -21,7 +21,7 @@ Usuários comuns ainda não possuem interface finalizada (rota `/movies` em dese
 - Angular Router
 - Angular Forms
 - TypeScript
-- CSS/Tailwind (opcional)
+- CSS/Tailwind
 - JWT (Token via Cookie)
 - Interceptors de Autenticação
 
