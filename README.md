@@ -2,10 +2,11 @@
 # 📘 Documentação do Frontend FavMovies
 
 Frontend da aplicação de Trailers de Filmes, desenvolvido em **Angular 19 standalone**.
-Este projeto oferece a interface administrativa para gerenciamento de Filmes e Usuários.
+Este projeto oferece uma interface administrativa para gerenciamento de Filmes e Usuários.
+Mais funcionalidades em breve.
 
 Usuários administradores autenticados poderão:
-- Visualizar insights sobre o uso da plataforma (Dashboard)
+- Visualizar insights sobre comsumo de filmes da plataforma (Visualizações, marcações como Favoritos, Avaliações, etc...)
 - Gerenciar filmes e usuários cadastrados
 - Editar suas próprias preferências de conta
 
