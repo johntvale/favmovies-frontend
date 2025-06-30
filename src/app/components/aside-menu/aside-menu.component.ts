@@ -14,7 +14,7 @@ import { bootstrapBoxArrowRight, bootstrapCollectionPlay, bootstrapColumnsGap, b
   styleUrls: ['./aside-menu.component.css']
 })
 export class AsideMenuComponent {
-  activeSection: string = '';
+  activeSection: string = 'dashboard';
 
   constructor(private router: Router) {}
 
